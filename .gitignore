@@ -3,3 +3,6 @@ node_modules
 Thumbs.db
 *-ignore*
 .vscode/*
+
+# Source material (not part of the deployed site; large + contains raw guest list)
+OG_Assets/

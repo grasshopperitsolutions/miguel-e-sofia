@@ -8,27 +8,26 @@ Miguel Comba & Sofia Moreira · 12 de Junho de 2027 · São João das Lampas.
 | Caminho        | O que é                                                                 |
 |----------------|------------------------------------------------------------------------|
 | `index.html`   | Página de entrada — deixa o convidado escolher a edição                |
+| `final/`       | **Edição Final** (recomendada) — mecânica de cartas da Clássica + assets originais + cada convidado procura o nome e recebe a **sua carta de jogar** (de `OG_Assets/Nomes.xlsx`) |
 | `classic/`     | **Edição Clássica** — reprodução fiel do convite original (`.ppsx`/vídeo): cortina → envelope + selo → cartas do baralho uma a uma |
 | `deluxe/`      | **Edição Deluxe** — versão criativa: a "caixa do jogo" completa em scroll, com mais animações e elementos de jogos populares |
 | `404.html`     | Página de erro                                                         |
+| `OG_Assets/`   | Material de origem (`.ppsx`, vídeo, JPEGs, `Nomes.xlsx`). **Fora do git** (`.gitignore`) — grande e contém a lista de convidados em bruto. |
 
 Cada app é **um único ficheiro HTML** autónomo (CSS + JS inline, foto do casal e mapa embutidos em base64). Não há passo de build nem dependências — abre em qualquer browser, funciona offline.
 
 ## Lista de convidados
 
-Em `classic/index.html` e `deluxe/index.html`, no fim do `<script>`, a constante `GUESTS`:
+**`final/`** — os dados vêm de `OG_Assets/Nomes.xlsx` (coluna `Name` + coluna `Carta`). São processados por `scripts/parse_names.py` e o JSON resultante está **embutido** em `final/index.html` na tag `<script id="guests">`.
 
-```js
-var GUESTS=[
-  "Nuno Moreira","Mónica Mateos", /* ... */
-];
-```
+- Cada grupo = uma "party" (um casal/família que partilha a mesma carta, ex.: `J♠` = Nuno Moreira + Moni). `+1/+2` = acompanhantes na mesma carta.
+- A procura aceita o primeiro nome ou o apelido; se houver mais do que uma party possível, mostra os nomes completos para escolher. Procurar qualquer membro da party dá o mesmo resultado.
+- Sem carta / não encontrado → **JOKER** + "contactar os noivos".
+- Para re-gerar após editar o Excel: `python scripts/parse_names.py` → copiar `guests.min.json` para a tag `<script id="guests">`.
 
-- A procura aceita só o primeiro nome; pede o nome completo se houver mais do que um jogador com esse primeiro nome **ou** apelido.
-- Nome não encontrado → mensagem + botão para contactar os noivos.
-- Os botões de RSVP abrem um email (`mailto:`) **sem destinatário** — preencher com o email dos noivos:
-  procurar `var MAILTO` / `var mailto` em cada ficheiro.
-- Na Edição Clássica, o nome que aparece no primeiro cartão está em `var GUEST_NAME`.
+**`classic/` e `deluxe/`** — lista fixa na constante `GUESTS` no fim do `<script>`.
+
+- Os botões de RSVP abrem um email (`mailto:`) **sem destinatário** — preencher com o email dos noivos (procurar `var MAILTO` / `var mailto`).
 
 ## Hosting — GitHub Pages
 
