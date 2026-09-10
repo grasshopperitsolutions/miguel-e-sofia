@@ -6,3 +6,7 @@ Thumbs.db
 
 # Source material (not part of the deployed site; large + contains raw guest list)
 OG_Assets/
+
+# transient parser output
+guests.json
+guests.min.json
