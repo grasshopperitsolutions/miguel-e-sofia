@@ -1,0 +1,13 @@
+name = "ms-o-jogo-rsvp"
+main = "index.js"
+compatibility_date = "2026-09-11"
+
+# Non-secret config. Change ALLOWED_ORIGIN once the site's real URL is known
+# (custom domain, or https://grasshopperitsolutions.github.io).
+[vars]
+ALLOWED_ORIGIN = "*"
+FROM_EMAIL = "M&S — O Jogo <onboarding@resend.dev>"
+
+# Secrets (never put these here — set them with `wrangler secret put`):
+#   RESEND_API_KEY   your Resend send-only key
+#   TO_EMAIL         the couple's inbox that should receive every RSVP

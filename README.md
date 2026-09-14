@@ -29,28 +29,32 @@ Cada app é **um único ficheiro HTML** autónomo (CSS + JS inline, foto do casa
 
 - Os botões de RSVP abrem um email (`mailto:`) **sem destinatário** — preencher com o email dos noivos (procurar `var MAILTO` / `var mailto`).
 
-## Hosting — GitHub Pages
+## RSVP por email (`final/`)
 
-O repositório ainda não existe. Para publicar:
+Os botões "VAMOS JOGAR" / "PASSAMOS A VEZ" em `final/` chamam `api/rsvp.js` (`RSVP_ENDPOINT = "/api/rsvp"`, mesmo domínio) que envia por **Resend**. Se essa chamada falhar por algum motivo, cai automaticamente para `mailto:`.
 
-```bash
-# a partir desta pasta
-git init -b main
-git add .
-git commit -m "Convite M&S — edições Clássica e Deluxe"
+O Resend não pode ser chamado diretamente do browser (não envia headers CORS — bloqueado independentemente do scope da API key), daí a função. Precisa de duas environment variables no projeto Vercel — ver secção seguinte. Existe também `rsvp-worker/`, a mesma função como Cloudflare Worker (alternativa caso o site volte a correr fora da Vercel); não está em uso enquanto `RSVP_ENDPOINT` apontar para `/api/rsvp`.
 
-# criar o repo no GitHub (ex.: com o gh CLI)
-gh repo create grasshopperitsolutions/miguel-e-sofia --private --source=. --remote=origin --push
-```
+## Hosting — Vercel
 
-Depois, no GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-O workflow `.github/workflows/deploy.yml` publica a pasta inteira a cada push para `main` (sem build).
+O repositório é **privado** e está ligado a um projeto Vercel (`grasshopperitsolutions/miguel-e-sofia`, equipa `Grasshopper 's projects`, plano Pro) via a GitHub App da Vercel. Cada push a `main` faz deploy automático — sem build, sem workflow do GitHub Actions (o antigo `.github/workflows/deploy.yml` de GitHub Pages foi removido; Pages não publica a partir de repos privados em contas gratuitas).
 
-O ficheiro `.nojekyll` está incluído para o Pages servir tudo tal como está.
+**Environment variables a configurar no dashboard da Vercel** (Project → Settings → Environment Variables), para o RSVP funcionar:
+
+| Nome | Obrigatória | Valor |
+|---|---|---|
+| `RESEND_API_KEY` | sim | a tua key da Resend (send-only) |
+| `TO_EMAIL` | sim | o email que deve receber cada RSVP |
+| `FROM_EMAIL` | não | por omissão usa `onboarding@resend.dev` — funciona sem verificar domínio, porque todos os RSVP vão para um único destinatário fixo (o dono da conta Resend) |
+| `ALLOWED_ORIGIN` | não | por omissão `*`; só importa se `api/rsvp.js` for chamado a partir de outro domínio |
+
+Depois de adicionar/alterar variáveis, é preciso um **redeploy** (novo push, ou "Redeploy" no dashboard) para entrarem em vigor.
+
+**Proteção de acesso**: por omissão a Vercel protege os deploys de repos privados com Vercel Authentication (só quem tem login na equipa consegue abrir o URL) — foi **desativada** neste projeto para o convite ficar acessível a qualquer convidado com o link. Se no futuro quiseres um site realmente privado (não só o código), ativa Password Protection ou Vercel Authentication em Project → Settings → Deployment Protection.
 
 ### Domínio próprio (opcional)
 
-Adicionar um ficheiro `CNAME` na raiz com o domínio (ex.: `convite.exemplo.pt`) e configurar o DNS.
+Project → Settings → Domains, na Vercel. SSL é automático.
 
 ## Desenvolvimento local
 
@@ -59,3 +63,5 @@ Abrir `index.html` diretamente no browser, ou servir a pasta:
 ```bash
 npx serve .
 ```
+
+Isto serve os ficheiros estáticos mas não `api/rsvp.js` (só existe como Vercel Function). Para testar o RSVP localmente: `npx vercel dev` (pede login Vercel; lê as environment variables do projeto ligado).

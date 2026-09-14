@@ -179,9 +179,15 @@
   .uno img{width:100%;display:block}
 
   .rsvp{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:6px}
-  .rsvp a{text-decoration:none;font-family:var(--mono);font-weight:700;font-size:12px;padding:10px 14px;border-radius:9px}
+  .rsvp button{text-decoration:none;font-family:var(--mono);font-weight:700;font-size:12px;padding:10px 14px;border-radius:9px;
+    border:0;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.25);transition:transform .1s,opacity .2s}
+  .rsvp button:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
+  .rsvp button:disabled{opacity:.55;cursor:default;transform:none;box-shadow:0 4px 0 rgba(0,0,0,.25)}
   .rsvp .yes{background:var(--green);color:#fff}
   .rsvp .no{background:#7a7a7a;color:#fff}
+  .rsvp-status{min-height:1.1em;font-size:12.5px;font-family:var(--mono)}
+  .rsvp-status.ok{color:var(--green)}
+  .rsvp-status.err{color:var(--red-deep)}
 
   .finale{display:flex;gap:16px;align-items:center;justify-content:center}
   .finale img{height:clamp(40px,12vw,54px);width:auto;mix-blend-mode:multiply}
@@ -317,6 +323,11 @@
   var MAP_CH="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(CHURCH);
   var MAP_Q ="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(QUINTA);
   var MAILTO="mailto:?subject="+encodeURIComponent("RSVP · M&S — O Jogo")+"&body=";
+  // Same-origin Vercel function (api/rsvp.js) — works as soon as
+  // RESEND_API_KEY + TO_EMAIL are set in the Vercel project's environment
+  // variables. If that fetch fails for any reason, the buttons fall back
+  // to a plain mailto: link automatically.
+  var RSVP_ENDPOINT="/api/rsvp";
 
   function greetCard(){
     if(!player && !identified){
@@ -430,15 +441,15 @@
       }},
 
     { id:'rsvp', cnr:['+2','🃏'], build:function(){
-        var who = player ? player.names.join(' & ') : '';
-        var b1=encodeURIComponent("Ola Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nCarta: "+(player?cardLabel(player):"—")+"\nConfirmo presenca em 12/06/2027: SIM\nNo de acompanhantes: \nRestricoes alimentares: \n\nAte ao tabuleiro!");
-        var b2=encodeURIComponent("Ola Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nInfelizmente nao vamos conseguir jogar em 12/06/2027.\nUm abraco!");
         return '<h2>Chegou a vossa vez!</h2>'+
           '<p>Lancem o dado e registem a jogada até <b>12/03/2027</b>.</p>'+
           '<div class="uno"><img src="'+A+'i_unocard.png" alt="+2"></div>'+
           '<p style="font-style:italic">Jogam connosco ou ficam de fora?</p>'+
-          '<div class="rsvp"><a class="yes" href="'+MAILTO+b1+'">🎲 VAMOS JOGAR</a>'+
-          '<a class="no" href="'+MAILTO+b2+'">🏳 PASSAMOS A VEZ</a></div>'+
+          '<div class="rsvp">'+
+            '<button type="button" class="yes" data-attend="yes">🎲 VAMOS JOGAR</button>'+
+            '<button type="button" class="no" data-attend="no">🏳 PASSAMOS A VEZ</button>'+
+          '</div>'+
+          '<div class="rsvp-status" id="rsvpStatus"></div>'+
           '<p class="mono" style="margin-top:8px">Para jogadores extra, contactar os noivos.</p>';
       }},
 
@@ -477,6 +488,7 @@
     inner.innerHTML=s.build();
     dropTiles(inner);
     if(s.id==='greet') wireGreet();
+    if(s.id==='rsvp') wireRsvp();
     btnPrev.disabled = i===0;
     btnNext.textContent = i===steps.length-1 ? 'FIM' : 'SEGUINTE ›';
     if(i>0) tapHint.hidden = (i===steps.length-1);
@@ -502,6 +514,45 @@
   function flash(){card.animate([{transform:'translate(-50%,-52%) scale(1)'},{transform:'translate(-50%,-52%) scale(1.02) rotate(-1deg)'},{transform:'translate(-50%,-52%) scale(1)'}],{duration:220});}
   function scheduleAuto(){stopAuto();if(manual)return;autoTimer=setTimeout(function(){if(idx<steps.length-1)go(idx+1);},7200);}
   function stopAuto(){if(autoTimer){clearTimeout(autoTimer);autoTimer=null;}}
+
+  function wireRsvp(){
+    var who = player ? player.names.join(' & ') : '';
+    var buttons=[].slice.call(document.querySelectorAll('.rsvp button'));
+    var status=document.getElementById('rsvpStatus');
+
+    function mailtoFallback(attend){
+      var body = attend==='yes'
+        ? "Ola Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nCarta: "+(player?cardLabel(player):"-")+"\nConfirmo presenca em 12/06/2027: SIM\nNo de acompanhantes: \nRestricoes alimentares: \n\nAte ao tabuleiro!"
+        : "Ola Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nInfelizmente nao vamos conseguir jogar em 12/06/2027.\nUm abraco!";
+      window.location.href = MAILTO+encodeURIComponent(body);
+    }
+
+    buttons.forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var attend=btn.dataset.attend;
+        if(!RSVP_ENDPOINT){ mailtoFallback(attend); return; }
+        buttons.forEach(function(b){b.disabled=true;});
+        status.className='rsvp-status';
+        status.textContent='A lançar o dado…';
+        fetch(RSVP_ENDPOINT,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({names:who||'(nome nao identificado)',card:player?cardLabel(player):'',attending:attend})
+        }).then(function(r){ if(!r.ok) throw new Error('http '+r.status); return r.json(); })
+          .then(function(res){
+            if(!res || res.ok!==true) throw new Error((res&&res.error)||'falhou');
+            status.className='rsvp-status ok';
+            status.textContent = attend==='yes' ? '🎲 Jogada registada — até lá!' : 'Registado. Vamos sentir a vossa falta.';
+          })
+          .catch(function(){
+            status.className='rsvp-status err';
+            status.textContent='Não foi possível enviar — a abrir o email…';
+            buttons.forEach(function(b){b.disabled=false;});
+            setTimeout(function(){ mailtoFallback(attend); },900);
+          });
+      });
+    });
+  }
 
   function wireGreet(){
     if(identified)return;
@@ -566,7 +617,7 @@
   });
   document.getElementById('stage').addEventListener('click',function(e){
     if(!started||busy)return;
-    if(e.target.closest('.nc')||e.target.closest('a'))return;
+    if(e.target.closest('.nc')||e.target.closest('a')||e.target.closest('.rsvp')||e.target.closest('button'))return;
     if(idx===0 && !identified)return;
     tapHint.hidden=true;
     if(idx<steps.length-1) go(idx+1);
