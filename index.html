@@ -2,114 +2,631 @@
 <html lang="pt-PT">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Miguel &amp; Sofia — M&amp;S, O Jogo</title>
-<meta name="description" content="Convite de casamento de Miguel Comba &amp; Sofia Moreira — 12 de Junho de 2027. M&S, O Jogo · Expansão: Aliança Estratégica.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>M&amp;S — O Jogo  ·  Convite de Casamento</title>
+<meta name="description" content="Miguel Comba &amp; Sofia Moreira — 12 de Junho de 2027. M&S, O Jogo · Expansão: Aliança Estratégica.">
 <meta name="robots" content="noindex">
-<meta property="og:title" content="Miguel &amp; Sofia — M&amp;S, O Jogo">
-<meta property="og:description" content="A vossa presença é requisitada no tabuleiro. 12 de Junho de 2027.">
-<meta property="og:type" content="website">
+<meta property="og:title" content="M&amp;S — O Jogo">
+<meta property="og:description" content="A tua presença é requisitada no tabuleiro. 12 de Junho de 2027.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%B2%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=EB+Garamond:ital@0;1&family=Space+Mono:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<!-- Fonts identified from the original invitation assets:
+     · game / UI text  -> IBM Plex Mono   (swap in ../ if the real one turns out to be Fira Mono / Ubuntu Mono)
+     · couple names     -> Playfair Display
+     · section headers  -> EB Garamond
+     · arcade bits      -> Press Start 2P / Cinzel wordmark -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
   :root{
-    --kraft:#c89b6d; --kraft-dark:#a97c4f; --paper:#f4ecd8;
-    --red:#b23a26; --red-deep:#8a2a1c; --gold:#c9a24a; --gold-lt:#e6c877; --ink:#241d17;
+    --kraft:#c69a6b; --kraft-2:#bb8b58; --kraft-edge:#9c7040;
+    --paper:#f3ead2; --paper-2:#e9dcbb; --card:#f6efdc;
+    --red:#b23a26; --red-deep:#8a2a1c; --ribbon:#b1432c;
+    --gold:#c9a24a; --gold-lt:#e6c877; --gold-dk:#a9832f;
+    --ink:#241d17; --ink-soft:#4a3826; --green:#2f6b3f;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+    --display:'Playfair Display',Georgia,serif;
+    --serif:'EB Garamond',Georgia,serif;
     --shadow:0 14px 40px rgba(40,20,10,.4);
   }
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
+  html,body{margin:0;padding:0;height:100%}
   body{
-    font-family:'EB Garamond',Georgia,serif;color:var(--ink);min-height:100vh;
-    background:radial-gradient(120% 90% at 50% 8%, #f0e3c4 0%, #e2cea4 55%, #c89b6d 100%);
-    display:flex;flex-direction:column;align-items:center;
+    font-family:var(--serif);color:var(--ink);
+    background:#d8c9a6 url("final/assets/hexbg.jpg") center/cover fixed no-repeat;
+    overflow:hidden;
   }
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
-    background-image:
-      linear-gradient(30deg, rgba(201,162,74,.12) 12%, transparent 12.5%, transparent 87%, rgba(201,162,74,.12) 87.5%),
-      linear-gradient(150deg, rgba(201,162,74,.12) 12%, transparent 12.5%, transparent 87%, rgba(201,162,74,.12) 87.5%),
-      linear-gradient(30deg, rgba(201,162,74,.12) 12%, transparent 12.5%, transparent 87%, rgba(201,162,74,.12) 87.5%),
-      linear-gradient(150deg, rgba(201,162,74,.12) 12%, transparent 12.5%, transparent 87%, rgba(201,162,74,.12) 87.5%);
-    background-size:40px 70px;background-position:0 0,0 0,20px 35px,20px 35px;
-  }
-  main{position:relative;z-index:1;width:min(92vw,880px);padding:56px 0 70px;text-align:center}
-  .chip{width:120px;height:120px;margin:0 auto 20px;border-radius:50%;position:relative;
-    background:repeating-conic-gradient(var(--gold) 0 20deg,#fff 20deg 40deg);
-    box-shadow:0 0 0 7px var(--gold-lt),0 0 0 11px #b98f38,var(--shadow);
-    display:flex;align-items:center;justify-content:center;animation:spin 12s linear infinite}
-  .chip::before{content:"";position:absolute;inset:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#efe4c8);box-shadow:inset 0 0 16px rgba(0,0,0,.2)}
-  .chip span{position:relative;font-family:'Cinzel',serif;font-weight:900;font-size:34px;color:var(--red-deep)}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  h1{font-family:'Cinzel',serif;font-weight:900;font-size:clamp(30px,7vw,58px);margin:.1em 0;color:var(--red-deep);text-shadow:2px 2px 0 var(--gold-lt)}
-  .exp{font-family:'Cinzel',serif;letter-spacing:3px;text-transform:uppercase;font-size:clamp(10px,2.4vw,14px);color:var(--kraft-dark)}
-  .names{font-size:clamp(18px,4vw,26px);margin:14px 0 4px}
-  .names b{color:var(--red)}
-  .date{font-family:'Space Mono',monospace;font-size:14px;color:var(--kraft-dark);letter-spacing:1px}
-  .prompt{margin:34px 0 18px;font-style:italic;font-size:18px;color:#5a3d28}
 
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  @media(max-width:820px){.cards{grid-template-columns:1fr}}
-  a.card{
-    display:flex;flex-direction:column;text-decoration:none;color:inherit;
-    background:linear-gradient(180deg,#fbf5e4,#efe1c0);border:3px solid var(--gold);border-radius:16px;
-    box-shadow:var(--shadow);padding:26px 22px;transition:transform .15s ease,box-shadow .15s ease;position:relative;overflow:hidden}
-  a.card:hover{transform:translateY(-6px) rotate(-.5deg);box-shadow:0 22px 50px rgba(40,20,10,.45)}
-  a.card:focus-visible{outline:3px solid var(--red)}
-  a.card .pip{position:absolute;top:10px;left:12px;font-family:'Cinzel',serif;font-weight:900;color:var(--red-deep);font-size:15px;line-height:1;letter-spacing:1px}
-  a.card .pip.br{top:auto;left:auto;bottom:10px;right:12px}
-  a.card .ico{font-size:44px;margin:6px 0 10px}
-  a.card h2{font-family:'Cinzel',serif;color:var(--red-deep);margin:0 0 6px;font-size:22px}
-  a.card p{margin:0;font-size:15px;line-height:1.4;color:#4a3826}
-  a.card .go{margin-top:16px;font-family:'Space Mono',monospace;font-weight:700;font-size:12px;
-    background:var(--red);color:#fff;border-radius:8px;padding:9px 14px;align-self:center;box-shadow:0 4px 0 var(--red-deep)}
+  /* ===== CURTAIN ===== */
+  #curtain{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center}
+  #curtain .drape{position:absolute;top:0;bottom:0;width:51%;
+    background:linear-gradient(90deg,#5c0d0d,#8e1414 18%,#b31d1d 32%,#7d1010 46%,#a81818 60%,#6d0e0e 78%,#8e1414);
+    background-size:110px 100%;box-shadow:inset 0 0 140px rgba(0,0,0,.65);
+    transition:transform 1.9s cubic-bezier(.66,0,.24,1)}
+  #curtain .drape::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.28) 0 7px,rgba(255,255,255,.05) 24px 34px)}
+  #curtain .drape.l{left:0}#curtain .drape.r{right:0}
+  #curtain.open .drape.l{transform:translateX(-102%)}
+  #curtain.open .drape.r{transform:translateX(102%)}
+  #curtain.closing .drape.l,#curtain.closing .drape.r{transform:translateX(0)}
+  #curtain.gone{opacity:0;pointer-events:none;transition:opacity .5s .9s}
+  .startbox{position:relative;z-index:2;text-align:center;color:#f4ecd8;padding:20px}
+  .startbox .coin{font-family:'Press Start 2P',monospace;font-size:11px;color:var(--gold-lt);animation:blink 1s steps(1) infinite;margin-bottom:22px}
+  @keyframes blink{50%{opacity:0}}
+  .startbox h1{font-family:'Cinzel',serif;font-weight:900;font-size:clamp(28px,7vw,54px);margin:0 0 6px;color:#f6e7c4;text-shadow:0 3px 0 #6d0e0e,0 7px 20px rgba(0,0,0,.5)}
+  .startbox p{font-style:italic;opacity:.85;margin:.2em 0 26px;font-family:var(--serif);font-size:18px}
+  .btn{font-family:'Press Start 2P',monospace;font-size:11px;background:var(--gold);color:#3a2410;border:0;padding:15px 22px;border-radius:6px;cursor:pointer;box-shadow:0 6px 0 #8a6a22,0 12px 22px rgba(0,0,0,.4)}
+  .btn:active{transform:translateY(4px);box-shadow:0 2px 0 #8a6a22}
 
-  footer{position:relative;z-index:1;margin-top:auto;padding:22px;text-align:center;color:#5a3d28;font-style:italic;font-size:14px}
-  footer span{display:block;font-family:'Press Start 2P',monospace;font-style:normal;font-size:9px;color:var(--kraft-dark);margin-top:8px;letter-spacing:1px}
-  @media(prefers-reduced-motion:reduce){.chip{animation:none}a.card{transition:none}}
+  /* ===== FLOATING PIECES ===== */
+  .floaties{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+  .floaty{position:absolute;font-size:26px;opacity:.13;animation:drift linear infinite}
+  @keyframes drift{0%{transform:translateY(112vh) rotate(0)}100%{transform:translateY(-14vh) rotate(360deg)}}
+
+  /* ===== STAGE ===== */
+  #stage{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;perspective:1600px}
+  .scene{position:relative;width:min(94vw,440px);height:100%;max-height:900px}
+
+  /* envelope */
+  .env{position:absolute;left:50%;bottom:-6%;transform:translateX(-50%);width:100%;height:55%;z-index:6}
+  .env .body{position:absolute;inset:0;background:linear-gradient(180deg,var(--kraft),var(--kraft-2));border:2px solid var(--kraft-edge);border-radius:10px 10px 6px 6px;box-shadow:var(--shadow)}
+  .env .pocket{position:absolute;left:0;right:0;bottom:0;height:64%;background:linear-gradient(180deg,var(--kraft-2),#b1854f);border:2px solid var(--kraft-edge);border-top:3px solid rgba(90,60,30,.35);border-radius:6px;z-index:9}
+  .env .pocket::before{content:"";position:absolute;left:8%;right:8%;top:6px;height:8px;background:rgba(255,245,225,.5);border-radius:4px}
+  .env .ribbon{position:absolute;top:-40%;bottom:0;left:50%;width:15%;transform:translateX(-50%) rotate(1.5deg);background:linear-gradient(90deg,#9a3826,#c14c33,#9a3826);z-index:10}
+  .env .ribbon::after{content:"";position:absolute;left:0;right:0;bottom:-24px;height:24px;
+    background:linear-gradient(-45deg,transparent 49%,#a63f2b 50%) 0 0/12px 24px,linear-gradient(45deg,transparent 49%,#a63f2b 50%) 0 0/12px 24px}
+  .env .flap{position:absolute;left:-1px;right:-1px;top:0;height:50%;background:linear-gradient(180deg,#c99a67,#bd8d59);border:2px solid var(--kraft-edge);
+    clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform 1s ease,opacity 1s ease;z-index:12}
+  .env.opened .flap{transform:rotateX(180deg) scaleY(.62);opacity:0;z-index:4}
+  .env .seal{position:absolute;left:50%;top:44%;width:96px;height:96px;transform:translate(-50%,-50%);z-index:14;transition:transform .55s ease,opacity .55s}
+  .env .seal img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;filter:drop-shadow(0 5px 8px rgba(0,0,0,.35))}
+  .env.opened .seal{transform:translate(-50%,-280%) rotate(26deg);opacity:0}
+
+  /* carrier = the player's own playing card */
+  .carrier{position:absolute;left:50%;top:50%;width:72%;aspect-ratio:63/97;transform:translate(-50%,-52%) rotateY(90deg);
+    z-index:20;opacity:0;transition:transform .4s ease,opacity .3s;transform-style:preserve-3d}
+  .carrier.flash{animation:carry .62s ease}
+  @keyframes carry{0%{opacity:0;transform:translate(-50%,-52%) rotateY(92deg) scale(.96)}
+    38%{opacity:1;transform:translate(-50%,-52%) rotateY(0) scale(1)}
+    66%{opacity:1;transform:translate(-50%,-52%) rotateY(0) scale(1)}
+    100%{opacity:0;transform:translate(-50%,-52%) rotateY(-92deg) scale(.96)}}
+  .pcard{position:absolute;inset:0;border-radius:12px;background:#fdfdf8;border:2px solid #2a2a2a;box-shadow:var(--shadow);
+    display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .pcard .cnr{position:absolute;font-family:var(--display);font-weight:900;line-height:.82;text-align:center;font-size:clamp(14px,3.8vw,18px)}
+  .pcard .cnr.tl{top:8px;left:10px}
+  .pcard .cnr.br{bottom:8px;right:10px;transform:rotate(180deg)}
+  .pcard .mid{font-size:clamp(48px,14vw,66px);line-height:1}
+  .pcard.red{color:#c0392b}.pcard.black{color:#1f1f1f}
+  .pcard.joker{color:#7d4bd0}
+  .pcard.back{background:repeating-linear-gradient(45deg,#8a2a1c 0 7px,#a5321f 7px 14px);border-color:#6d1c11}
+  .pcard.back span{font-family:var(--display);font-weight:900;font-size:30px;color:#f3ead2;
+    background:rgba(138,42,28,.9);border:2px solid #f3ead2;border-radius:50%;width:64px;height:64px;display:flex;align-items:center;justify-content:center}
+
+  /* content card */
+  .card{position:absolute;left:50%;top:50%;width:88%;aspect-ratio:63/97;transform:translate(-50%,140%) scale(.9);
+    background:var(--card) url("final/assets/hexbg.jpg") center/200% no-repeat;background-blend-mode:overlay;
+    border-radius:14px;border:7px solid var(--gold-lt);box-shadow:var(--shadow),inset 0 0 0 2px var(--gold);
+    z-index:8;opacity:0;transition:transform .6s cubic-bezier(.4,1.1,.4,1),opacity .4s;display:flex;flex-direction:column;overflow:hidden}
+  .card.show{transform:translate(-50%,-52%) scale(1);opacity:1}
+  .card.leaving{transform:translate(-165%,-70%) rotate(-15deg) scale(.9);opacity:0}
+  /* inner gold frame — the boardgame-box look */
+  .card::before{content:"";position:absolute;inset:9px;border:1.5px solid var(--gold-dk);border-radius:8px;opacity:.6;pointer-events:none;z-index:3}
+  .card .cnr{position:absolute;font-family:var(--display);font-weight:900;font-size:15px;line-height:.82;color:var(--red-deep);z-index:4}
+  .card .cnr.tl{top:9px;left:12px}.card .cnr.br{bottom:9px;right:12px;transform:rotate(180deg)}
+  .card .inner{flex:1;padding:26px 19px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;overflow:auto}
+  .card .inner::-webkit-scrollbar{width:0}
+  .card h2{font-family:var(--display);font-weight:700;color:var(--red-deep);margin:0;font-size:clamp(20px,5.4vw,28px);line-height:1.12}
+  .card h3{font-family:var(--serif);font-weight:500;color:var(--kraft-edge);margin:2px 0;font-size:13px;letter-spacing:3px;text-transform:uppercase}
+  .card .kicker{font-family:var(--serif);font-size:clamp(24px,6vw,32px);color:var(--gold-dk);margin:0;letter-spacing:.5px}
+  .card p{margin:3px 0;font-size:clamp(13px,3.5vw,15.5px);line-height:1.36}
+  .card .mono{font-family:var(--mono);font-size:12px;letter-spacing:0}
+  .card .big{font-family:var(--display);font-weight:700;font-size:clamp(24px,7vw,33px);color:var(--red-deep)}
+  .card .amp{height:1em;vertical-align:-.12em;mix-blend-mode:multiply}
+  .card hr.rule{width:62%;border:0;border-top:2px dotted var(--kraft-edge);margin:6px 0}
+  .card a{color:var(--red);font-weight:600}
+  .card img.photo{max-height:42%;border-radius:8px;border:4px solid var(--gold-lt);box-shadow:0 8px 18px rgba(0,0,0,.3)}
+  .gico{width:auto;vertical-align:middle}
+
+  /* scrabble tiles */
+  .scrab{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin:2px 0}
+  .stile{width:30px;height:30px;background:linear-gradient(160deg,#f6ecc9,#e6d29a);border-radius:5px;border:1px solid #b99a58;
+    box-shadow:0 3px 0 #a5843f;font-family:var(--display);font-weight:700;font-size:17px;color:#7a5a1e;
+    display:flex;align-items:center;justify-content:center;position:relative;transform:translateY(-90px);opacity:0}
+  .stile.drop{animation:drop .45s cubic-bezier(.3,1.4,.5,1) forwards}
+  @keyframes drop{to{transform:none;opacity:1}}
+  .stile sub{position:absolute;right:2px;bottom:0;font-size:8px;font-weight:400}
+
+  /* elementos list */
+  .elem{width:100%;text-align:left;display:flex;flex-direction:column;gap:9px}
+  .elem .row{display:flex;gap:11px;align-items:flex-start}
+  .elem .row>img{width:40px;flex:0 0 40px;object-fit:contain;margin-top:2px}
+  .elem .row b{color:var(--red-deep);font-family:var(--mono);font-weight:600;font-size:13.5px;letter-spacing:-.3px}
+  .elem .row small{display:block;font-size:12.5px;color:var(--ink-soft);line-height:1.32;font-family:var(--serif)}
+
+  /* stat / box-back grid */
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;font-family:var(--mono);font-size:11px}
+  .stats div{background:rgba(255,250,235,.62);border:1px solid var(--kraft-edge);border-radius:6px;padding:6px 8px;text-align:left}
+  .stats b{color:var(--red-deep);display:block;font-size:10px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:1px}
+
+  /* boardgame stat badges (extracted from the poker-chip asset) */
+  .badges3{display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
+  .badges3 img{height:44px;width:auto;filter:drop-shadow(0 3px 5px rgba(0,0,0,.2))}
+
+  .chipimg{width:clamp(120px,34vw,160px);height:auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.28))}
+
+  /* timeline */
+  .phases{width:100%;display:flex;flex-direction:column;gap:3px;font-family:var(--mono);font-size:12.5px}
+  .phases div{display:flex;gap:10px;align-items:baseline}
+  .phases b{color:var(--red-deep);font-weight:700;min-width:34px}
+  .phases i{flex:1;border-bottom:1px dotted var(--kraft-edge);font-style:normal}
+
+  /* map */
+  svg.map{width:100%;height:auto;border-radius:8px;border:2px solid var(--kraft-edge);background:#e8f1e6}
+  .legend{width:100%;display:flex;flex-direction:column;gap:7px;text-align:left;margin-top:4px}
+  .legend .row{display:flex;gap:9px;align-items:flex-start}
+  .legend .row img{width:30px;flex:0 0 30px;object-fit:contain}
+  .legend .row small{font-family:var(--mono);font-size:11px;line-height:1.3}
+  .legend .row small b{color:var(--red-deep)}
+
+  /* objetivos / regras with role icons */
+  .role{display:flex;gap:10px;align-items:center;justify-content:center;margin-bottom:2px}
+  .role img{height:44px;width:auto}
+  .role span{font-family:var(--serif);font-size:clamp(20px,5.5vw,26px);color:var(--gold-dk)}
+  .ruleslist{width:100%;text-align:left;display:flex;flex-direction:column;gap:6px}
+  .ruleslist .r{display:flex;gap:8px;font-size:12.5px;line-height:1.3}
+  .ruleslist .r span{flex:0 0 16px;text-align:center}
+
+  .uno{width:78px;transform:rotate(-5deg);filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
+  .uno img{width:100%;display:block}
+
+  .rsvp{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .rsvp button{text-decoration:none;font-family:var(--mono);font-weight:700;font-size:12px;padding:10px 14px;border-radius:9px;
+    border:0;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.25);transition:transform .1s,opacity .2s}
+  .rsvp button:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
+  .rsvp button:disabled{opacity:.55;cursor:default;transform:none;box-shadow:0 4px 0 rgba(0,0,0,.25)}
+  .rsvp .yes{background:var(--green);color:#fff}
+  .rsvp .no{background:#7a7a7a;color:#fff}
+  .rsvp-status{min-height:1.1em;font-size:12.5px;font-family:var(--mono)}
+  .rsvp-status.ok{color:var(--green)}
+  .rsvp-status.err{color:var(--red-deep)}
+
+  .finale{display:flex;gap:16px;align-items:center;justify-content:center}
+  .finale img{height:clamp(40px,12vw,54px);width:auto;mix-blend-mode:multiply}
+
+  /* name-check */
+  .nc{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .nc input{font-family:var(--serif);font-size:16px;padding:10px 12px;border:2px solid var(--kraft-edge);border-radius:9px;background:#fffdf5;width:100%;max-width:250px;text-align:center}
+  .nc button{font-family:var(--mono);font-weight:700;font-size:13px;background:var(--red);color:#fff;border:0;border-radius:9px;padding:10px 18px;cursor:pointer;box-shadow:0 4px 0 var(--red-deep)}
+  .nc button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--red-deep)}
+  .nc .res{font-size:13px;line-height:1.35;font-family:var(--serif)}
+  .nc .res.ask{color:#8a6a1e}.nc .res.no{color:var(--red-deep)}
+  .nc .res .opt{display:inline-block;background:rgba(255,250,235,.72);border:1px solid var(--kraft-edge);border-radius:6px;padding:2px 7px;margin:3px 3px 0;cursor:pointer;font-weight:600}
+
+  /* HUD */
+  #hud{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;flex-direction:column;align-items:center;gap:9px;
+    padding:12px calc(12px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left));
+    opacity:0;transition:opacity .5s;pointer-events:none}
+  #hud.on{opacity:1;pointer-events:auto}
+  .pips{display:flex;gap:6px}
+  .pips i{width:8px;height:8px;border-radius:50%;background:rgba(120,80,40,.35);transition:.3s;cursor:pointer}
+  .pips i.act{background:var(--red-deep);transform:scale(1.4)}
+  .nav{display:flex;gap:8px}
+  .nav button{font-family:var(--mono);font-weight:700;font-size:12px;border:0;border-radius:8px;padding:9px 13px;cursor:pointer;background:var(--kraft-edge);color:var(--paper);box-shadow:0 4px 0 #6e4e28}
+  .nav button:active{transform:translateY(3px);box-shadow:0 1px 0 #6e4e28}
+  .nav button.primary{background:var(--red);box-shadow:0 4px 0 var(--red-deep)}
+  .nav button:disabled{opacity:.4}
+  .quip{position:fixed;left:50%;top:9%;transform:translateX(-50%);z-index:25;font-family:'Press Start 2P',monospace;font-size:10px;
+    color:#fff;background:rgba(138,42,28,.92);padding:8px 12px;border-radius:8px;opacity:0;pointer-events:none;white-space:nowrap}
+  .quip.show{animation:quip 1.5s ease}
+  @keyframes quip{0%{opacity:0;transform:translateX(-50%) translateY(-6px)}15%,70%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0}}
+  .tap-hint{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);z-index:24;font-family:var(--mono);font-size:12px;
+    color:#5a3d28;background:rgba(255,250,235,.82);padding:5px 11px;border-radius:13px;animation:bob 1.6s ease-in-out infinite;pointer-events:none}
+  @keyframes bob{50%{transform:translateX(-50%) translateY(-5px)}}
+
+  @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.25s!important}}
 </style>
 </head>
 <body>
-<main>
-  <div class="chip"><span>M&amp;S</span></div>
-  <div class="exp">Atenção, Jogadores</div>
-  <h1>M&amp;S — O Jogo</h1>
-  <div class="exp">Expansão · Aliança Estratégica</div>
-  <p class="names">A vossa presença é requisitada no tabuleiro de<br><b>Miguel Comba</b> &amp; <b>Sofia Moreira</b></p>
-  <p class="date">12 · 06 · 2027 &nbsp;·&nbsp; São João das Lampas</p>
 
-  <p class="prompt">Escolhe o teu tabuleiro:</p>
+<div class="floaties" id="floaties"></div>
 
-  <div class="cards">
-    <a class="card" href="./final/">
-      <span class="pip">A&#8202;♠</span><span class="pip br">A&#8202;♠</span>
-      <div class="ico">🃏</div>
-      <h2>Edição Final <em style="font-style:normal;font-size:11px;color:var(--kraft-dark)">(recomendada)</em></h2>
-      <p>Cortina, envelope e selo, cartas do baralho uma a uma — e cada convidado procura o nome e recebe a <b>sua</b> carta de jogar.</p>
-      <span class="go">PROCURAR A MINHA CARTA ›</span>
-    </a>
-    <a class="card" href="./classic/">
-      <span class="pip">J&#8202;♠</span><span class="pip br">J&#8202;♠</span>
-      <div class="ico">✉️</div>
-      <h2>Edição Clássica</h2>
-      <p>O convite tal e qual: a cortina abre, o envelope quebra o selo e as cartas do baralho saem uma a uma.</p>
-      <span class="go">ABRIR O CONVITE ›</span>
-    </a>
-    <a class="card" href="./deluxe/">
-      <span class="pip">M&#8202;♥</span><span class="pip br">S&#8202;♠</span>
-      <div class="ico">🎲</div>
-      <h2>Edição Deluxe</h2>
-      <p>A caixa do jogo por inteiro: tabuleiro, fases, regras da casa e as peças todas — com scroll e animações.</p>
-      <span class="go">ABRIR A CAIXA ›</span>
-    </a>
+<div id="curtain">
+  <div class="drape l"></div><div class="drape r"></div>
+  <div class="startbox">
+    <div class="coin">◉ INSIRA UMA MOEDA ◉</div>
+    <h1>M&amp;S — O JOGO</h1>
+    <p>Expansão: Aliança Estratégica</p>
+    <button class="btn" id="startBtn">▶ ABRIR O CONVITE</button>
   </div>
-</main>
+</div>
 
-<footer>
-  "Sem ti, o jogo não fica… completo."
-  <span>Miguel &amp; Sofia · RSVP até 12/03/2027</span>
-</footer>
+<div id="stage">
+  <div class="scene">
+    <div class="env" id="env">
+      <div class="body"></div>
+      <div class="ribbon"></div>
+      <div class="flap"></div>
+      <div class="pocket"></div>
+      <div class="seal" id="seal"><img src="final/assets/seal.jpg" alt="Selo M&amp;S"></div>
+    </div>
+    <div class="carrier" id="carrier"><div class="pcard back"><span>M&amp;S</span></div></div>
+    <div class="card" id="card">
+      <div class="cnr tl" id="cnrTL">M♥</div>
+      <div class="cnr br" id="cnrBR">S♠</div>
+      <div class="inner" id="cardInner"></div>
+    </div>
+  </div>
+</div>
+
+<div class="quip" id="quip"></div>
+<div class="tap-hint" id="tapHint" hidden>toca no ecrã para avançar ›</div>
+
+<div id="hud">
+  <div class="pips" id="pips"></div>
+  <div class="nav">
+    <button id="prev">‹</button>
+    <button id="next" class="primary">SEGUINTE ›</button>
+    <button id="replay">↺</button>
+  </div>
+</div>
+
+<script id="guests" type="application/json">[{"rank":"K","suit":"♥","joker":false,"nocard":false,"names":["Miguel Comba"],"aliases":[],"q":["comba","miguel"]},{"rank":"Q","suit":"♠","joker":false,"nocard":false,"names":["Sofia Moreira"],"aliases":[],"q":["moreira","sofia"]},{"rank":"A","suit":"♠","joker":false,"nocard":false,"names":["Cristina Moreira","Luis Moreira"],"aliases":[],"q":["cristina","luis","moreira"]},{"rank":"A","suit":"♣","joker":false,"nocard":false,"names":["Julia Fernandes"],"aliases":["Tia Juju"],"q":["fernandes","juju","julia"]},{"rank":"A","suit":"♦","joker":false,"nocard":false,"names":["Aurelia Parreira"],"aliases":["Tia Lela"],"q":["aurelia","lela","parreira"]},{"rank":"A","suit":"♥","joker":false,"nocard":false,"names":["Ana Cristina Comba"],"aliases":[],"q":["ana","comba","cristina"]},{"rank":"K","suit":"♦","joker":false,"nocard":false,"names":["Nelson dos Santos","Arlete"],"aliases":["Tio Nelson"],"q":["arlete","dos","nelson","santos"]},{"rank":"K","suit":"♠","joker":false,"nocard":false,"names":["Manuel Moreira","Maria Moreira"],"aliases":[],"q":["manuel","maria","moreira"]},{"rank":"J","suit":"♥","joker":false,"nocard":false,"names":["Diogo Comba"],"aliases":[],"q":["comba","diogo"]},{"rank":"J","suit":"♦","joker":false,"nocard":false,"names":["José João Dantas"],"aliases":[],"q":["dantas","joao","jose"]},{"rank":"J","suit":"♣","joker":false,"nocard":false,"names":["Daniel Malato","Márcia Gonçalves"],"aliases":[],"q":["daniel","goncalves","malato","marcia"]},{"rank":"J","suit":"♠","joker":false,"nocard":false,"names":["Nuno Moreira","Moni"],"aliases":[],"q":["moni","moreira","nuno"]},{"rank":"Q","suit":"♦","joker":false,"nocard":false,"names":["Ana Afonso","Cristina Antunes"],"aliases":[],"q":["afonso","ana","antunes","cristina"]},{"rank":"Q","suit":"♥","joker":false,"nocard":false,"names":["Daniela Rodrigues","Ben"],"aliases":[],"q":["ben","dani","daniela","rodrigues"]},{"rank":"Q","suit":"♣","joker":false,"nocard":false,"names":["Margarida Patriarca","Flavio Pereira","Isabel Patriarca","Artur Patriarca"],"aliases":[],"q":["artur","flavio","guida","isabel","margarida","patriarca","pereira"]},{"rank":"JOKER","suit":null,"joker":true,"nocard":false,"names":["João Ventura","Bela Ventura","Gonçalinho Ventura"],"aliases":[],"q":["bela","goncalinho","joao","ventura"]},{"rank":"10","suit":"♥","joker":false,"nocard":false,"names":["Tia Maria","Tio Alfredo"],"aliases":[],"q":["alfredo","maria"]},{"rank":"9","suit":"♥","joker":false,"nocard":false,"names":["Tio Toto Fernando"],"aliases":[],"q":["fernando","toto"]},{"rank":"8","suit":"♥","joker":false,"nocard":false,"names":["Fernando Ventura","Bernardo Ventura","Bernardo"],"aliases":[],"q":["bernardo","fernando","ventura"]},{"rank":"7","suit":"♥","joker":false,"nocard":false,"names":["Ricardo Ventura","Acompanhante"],"aliases":[],"q":["ricardo","ventura"]},{"rank":"6","suit":"♥","joker":false,"nocard":false,"names":["Sergio Ventura","Rita"],"aliases":[],"q":["rita","sergio","ventura"]},{"rank":"5","suit":"♥","joker":false,"nocard":false,"names":["Pedro","Paula","Beatriz"],"aliases":[],"q":["beatriz","dauther","paula","pedro","toto"]},{"rank":"4","suit":"♥","joker":false,"nocard":false,"names":["Fernando Castro","Fabio Castro","Acompanhante","Eugenia Botelho"],"aliases":[],"q":["botelho","castro","eugenia","fabio","fernando","mother"]},{"rank":"3","suit":"♥","joker":false,"nocard":false,"names":["Constança","Acompanhante"],"aliases":[],"q":["constanca"]},{"rank":"10","suit":"♦","joker":false,"nocard":false,"names":["Sofia Faustino","Beatriz"],"aliases":[],"q":["beatriz","faustino","sofia"]},{"rank":"9","suit":"♦","joker":false,"nocard":false,"names":["Rodrigo Mendes","Vera"],"aliases":[],"q":["mendes","rodrigo","vera"]},{"rank":"8","suit":"♦","joker":false,"nocard":false,"names":["João Cunha","Claudia","Santiago"],"aliases":[],"q":["claudia","cunha","joao","santiago"]},{"rank":"7","suit":"♦","joker":false,"nocard":false,"names":["Ricardo Reis","Manuela"],"aliases":[],"q":["manuela","reis","ricardo"]},{"rank":"6","suit":"♦","joker":false,"nocard":false,"names":["Priscila Mendes","Priscila"],"aliases":[],"q":["mendes","priscila"]},{"rank":"5","suit":"♦","joker":false,"nocard":false,"names":["Nuno Tavares","Ana"],"aliases":[],"q":["ana","nuno","tavares"]},{"rank":"4","suit":"♦","joker":false,"nocard":false,"names":["Rita Teixeira"],"aliases":[],"q":["rita","teixeira"]},{"rank":"3","suit":"♦","joker":false,"nocard":false,"names":["Pedro Baptista"],"aliases":[],"q":["baptista","pedro"]},{"rank":"2","suit":"♦","joker":false,"nocard":false,"names":["Paulo Brioso","Acompanhante"],"aliases":[],"q":["brioso","paulo"]},{"rank":"JOKER","suit":null,"joker":true,"nocard":true,"names":["Mitchell"],"aliases":[],"q":["mitchell"]},{"rank":"JOKER","suit":null,"joker":true,"nocard":false,"names":["Manuela","Lara","Dona Helena"],"aliases":[],"q":["dona","helena","lara","manuela"]},{"rank":"10","suit":"♠","joker":false,"nocard":false,"names":["Helena Quaresma","João Quaresma"],"aliases":["Tia Lena"],"q":["helena","husband","joao","lena","quaresma"]},{"rank":"9","suit":"♠","joker":false,"nocard":false,"names":["Primo Zézito","Acompanhante"],"aliases":[],"q":["primo","zezito"]},{"rank":"8","suit":"♠","joker":false,"nocard":false,"names":["Fernanda Correia"],"aliases":[],"q":["correia","fernanda"]},{"rank":"7","suit":"♠","joker":false,"nocard":false,"names":["Marta Quaresma","Gonçalo Matos"],"aliases":[],"q":["goncalo","husband","marta","matos","quaresma"]},{"rank":"6","suit":"♠","joker":false,"nocard":false,"names":["Graça Gonçalves","Zé Ricardo Gonçalves"],"aliases":["Tia Graça","Tio Zé"],"q":["goncalves","graca","ricardo","ze"]},{"rank":"4","suit":"♠","joker":false,"nocard":false,"names":["Vitor Ramos"],"aliases":[],"q":["ramos","vitor"]},{"rank":"3","suit":"♠","joker":false,"nocard":false,"names":["Angela Nobre"],"aliases":[],"q":["angela","nobre"]},{"rank":"10","suit":"♣","joker":false,"nocard":false,"names":["Emidio Martins"],"aliases":[],"q":["emidio","martins"]},{"rank":"9","suit":"♣","joker":false,"nocard":false,"names":["Ana","Paulinho"],"aliases":[],"q":["ana","paulinho"]},{"rank":"7","suit":"♣","joker":false,"nocard":false,"names":["Célia","Orlando"],"aliases":[],"q":["celia","husband","orlando"]},{"rank":"6","suit":"♣","joker":false,"nocard":false,"names":["Paula","Paulo","Catarina"],"aliases":[],"q":["catarina","dauther","husband","paula","paulo"]},{"rank":"3","suit":"♣","joker":false,"nocard":false,"names":["Philip Kirby","Margarida Guerra"],"aliases":[],"q":["guerra","kirby","margarida","philip"]},{"rank":"JOKER","suit":null,"joker":true,"nocard":true,"names":["Catarina"],"aliases":[],"q":["catarina"]},{"rank":"JOKER","suit":null,"joker":true,"nocard":true,"names":["Ana Sousa"],"aliases":[],"q":["ana","sousa"]},{"rank":"JOKER","suit":null,"joker":true,"nocard":true,"names":["Amilcar Alves","Amelia Melo"],"aliases":[],"q":["alves","amelia","amilcar","melo"]}]</script>
+<script>
+(function(){
+  "use strict";
+  var GROUPS = JSON.parse(document.getElementById('guests').textContent);
+  var A='final/assets/';
+
+  /* floating pieces */
+  var bits=["♟","♜","♞","🎲","🃏","🎯","🀄","🁣","♠","♥","♦","♣","🧩","🎴","👑","💍","♚","⏳"];
+  var fl=document.getElementById('floaties');
+  for(var i=0;i<16;i++){var s=document.createElement('div');s.className='floaty';s.textContent=bits[i%bits.length];
+    s.style.left=(Math.random()*100)+'%';s.style.animationDuration=(16+Math.random()*22)+'s';
+    s.style.animationDelay=(-Math.random()*32)+'s';s.style.fontSize=(15+Math.random()*26)+'px';fl.appendChild(s);}
+
+  function norm(s){return (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,"").toLowerCase().trim().replace(/\s+/g,' ');}
+  var SCORES={a:1,b:3,c:3,d:2,e:1,f:4,g:2,h:4,i:1,j:8,l:1,m:3,n:1,o:1,p:3,q:10,r:1,s:1,t:1,u:1,v:4,x:8,z:10,k:5,w:4,y:4};
+  function tilesHTML(name){
+    return '<div class="scrab">'+name.toUpperCase().split('').map(function(ch){
+      var sc=SCORES[ch.toLowerCase()];
+      return '<div class="stile">'+(ch===' '?'&nbsp;':ch)+(sc?'<sub>'+sc+'</sub>':'')+'</div>';
+    }).join('')+'</div>';
+  }
+  function dropTiles(scope){scope.querySelectorAll('.stile').forEach(function(t,i){setTimeout(function(){t.classList.add('drop');},i*70);});}
+  function firstName(n){return (n||'').split(' ')[0];}
+
+  /* ---------- guest search ---------- */
+  function search(raw){
+    var q=norm(raw); if(!q) return {t:'empty'};
+    var toks=q.split(' ');
+    var hits=GROUPS.filter(function(g){return toks.every(function(t){return g.q.indexOf(t)>-1;});});
+    if(hits.length===1) return {t:'ok',g:hits[0]};
+    if(hits.length>1)  return {t:'ask',list:hits};
+    return {t:'no'};
+  }
+
+  /* ---------- player's card ---------- */
+  var player=null;
+  function suitColor(s){return (s==='♥'||s==='♦')?'red':'black';}
+  function pcardHTML(g){
+    if(!g||g.joker){
+      return '<div class="pcard joker"><div class="cnr tl">J<br>O<br>K<br>E<br>R</div><div class="mid">🃏</div><div class="cnr br">J<br>O<br>K<br>E<br>R</div></div>';
+    }
+    var c=g.rank+'<br>'+g.suit;
+    return '<div class="pcard '+suitColor(g.suit)+'"><div class="cnr tl">'+c+'</div><div class="mid">'+g.suit+'</div><div class="cnr br">'+c+'</div></div>';
+  }
+  function cardLabel(g){return (!g||g.joker)?'JOKER':g.rank+g.suit;}
+  function setCarrier(g){carrier.innerHTML = g===undefined ? '<div class="pcard back"><span>M&amp;S</span></div>' : pcardHTML(g);}
+
+  /* ---------- deck ---------- */
+  var CHURCH="Igreja Matriz de São João Baptista das Lampas, Av. Central 2705-737 São João das Lampas";
+  var QUINTA="Quinta da Praia, Estrada da Aguda, Rua do Roligo 52, 2705-623 Fontanelas";
+  var MAP_CH="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(CHURCH);
+  var MAP_Q ="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(QUINTA);
+  var MAILTO="mailto:?subject="+encodeURIComponent("RSVP · M&S — O Jogo")+"&body=";
+  // Back on GitHub Pages: no server, so no relay to point at — RSVP
+  // buttons use plain mailto: links (see mailtoFallback below). Set this
+  // to a deployed rsvp-worker/ (Cloudflare Worker) URL to send real
+  // emails via Resend instead; see rsvp-worker/README.md.
+  var RSVP_ENDPOINT="";
+
+  function greetCard(){
+    if(!player && !identified){
+      return '<h3>Atenção, Jogador</h3>'+
+        '<p>a tua presença é requisitada no tabuleiro</p>'+
+        '<h2>M&amp;S — O Jogo</h2>'+
+        '<p class="mono">EXPANSÃO: ALIANÇA ESTRATÉGICA</p>'+
+        '<p style="font-style:italic">Quem está no tabuleiro?</p>';
+    }
+    if(!player){
+      return '<h3>Atenção, Jogador</h3>'+
+        '<img class="gico" style="height:70px" src="'+A+'i_ring.png" alt="">'+
+        '<p>Não te encontrámos no baralho — mas a mesa é grande.</p>'+
+        '<p class="mono">Entras como JOKER 🃏. Fala com os noivos para confirmar o teu lugar.</p>'+
+        '<p><b>Prepara os dados!</b> 🎲</p>';
+    }
+    var fn=firstName(player.names[0]);
+    var withtxt = player.names.length>1 ? '<p class="mono">'+player.names.join('  &  ')+'</p>' : '';
+    return '<h3>Atenção, Jogador</h3>'+
+      tilesHTML(fn)+ withtxt +
+      '<p>a tua presença é requisitada no tabuleiro</p>'+
+      '<h2 style="font-size:clamp(18px,4.8vw,24px)">M&amp;S — O Jogo</h2>'+
+      '<p class="mono">EXPANSÃO: ALIANÇA ESTRATÉGICA</p>'+
+      '<img class="gico" style="height:58px" src="'+A+'i_ring.png" alt="">'+
+      '<p>A tua carta: <b>'+cardLabel(player)+'</b>'+(player.nocard?' <span class="mono">(JOKER)</span>':'')+'</p>'+
+      '<p><b>Prepara os dados!</b> 🎲</p>';
+  }
+
+  var steps=[
+    { id:'greet', cnr:['♣','♦'], build:greetCard },
+
+    { id:'couple', cnr:['M♥','S♠'], build:function(){
+        return '<img class="photo" src="'+A+'couple.jpg" alt="Miguel &amp; Sofia">'+
+          '<h2>Miguel Comba <img class="amp" src="'+A+'amp.jpg" alt="&amp;"> Sofia Moreira</h2>'+
+          '<h3>Aliança Estratégica</h3>'+
+          '<div class="big">12 de Junho de 2027</div>'+
+          '<p style="font-style:italic">"Advance to the altar."</p>';
+      }},
+
+    { id:'ficha', cnr:['🎲','🃏'], build:function(){
+        return '<img class="chipimg" src="'+A+'chip.png" alt="Ficha M&amp;S">'+
+          '<h2 style="margin-top:4px">M&amp;S — O Jogo</h2>'+
+          '<p class="kicker">Expansão: Aliança Estratégica</p>'+
+          '<div class="badges3"><img src="'+A+'b_convidados.png" alt="2 noivos + convidados">'+
+            '<img src="'+A+'b_age.png" alt="0 a 100 anos"><img src="'+A+'b_time.png" alt="12 horas"></div>'+
+          '<div class="stats" style="margin-top:8px">'+
+            '<div><b>Nº de Jogadores</b>2 noivos + Convidados</div>'+
+            '<div><b>Duração</b>1 Dia</div>'+
+            '<div><b>Idade recomendada</b>0 aos 100</div>'+
+            '<div><b>Código de Equipamento</b>Casual</div></div>';
+      }},
+
+    { id:'elem', cnr:['♜','♞'], build:function(){
+        function row(ic,t,d){return '<div class="row"><img src="'+A+ic+'" alt=""><div><b>'+t+'</b><small>'+d+'</small></div></div>';}
+        return '<p class="kicker">Elementos</p>'+
+          '<div class="elem">'+
+          row('i_king.png','2 Noivos','Miguel &amp; Sofia')+
+          row('i_puzzle.png','2 Tabuleiros',
+            '<a href="'+MAP_CH+'" target="_blank" rel="noopener">Igreja Matriz de S. João Baptista das Lampas ›</a><br>Av. Central, 2705-737 · São João das Lampas<br>'+
+            '<a href="'+MAP_Q+'" target="_blank" rel="noopener">Quinta da Praia ›</a><br>Est. da Aguda, R. do Roligo 52 · 2705-623 Fontanelas')+
+          row('i_domino.png','1 Dia de Jogo','12 de Junho de 2027 · Sábado')+
+          row('i_pawn.png','1 Combinação Especial','Convidados, Comida, Animação e Diversão')+
+          '</div>';
+      }},
+
+    { id:'board', cnr:['♗','♛'], build:function(){
+        return '<p class="kicker">O Tabuleiro</p>'+
+          '<svg class="map" viewBox="0 0 300 150" role="img" aria-label="Percurso da Igreja à Quinta">'+
+            '<rect x="0" y="0" width="66" height="150" fill="#bfe0ef"/><rect x="66" y="0" width="234" height="150" fill="#dff0e4"/>'+
+            '<path d="M0 14h300M0 32h300M0 50h300M0 68h300M0 86h300M0 104h300M0 122h300M0 140h300" stroke="#cbb98a" stroke-width=".4" opacity=".5"/>'+
+            '<path d="M250 26 L210 52 L232 74 L188 92 L150 84 L120 108 L58 120" fill="none" stroke="#b23a26" stroke-width="3.2" stroke-dasharray="1 6" stroke-linecap="round"/>'+
+            '<text x="250" y="22" font-size="15" text-anchor="middle">♗</text><text x="250" y="34" font-size="6" text-anchor="middle" fill="#5a3d28">Igreja</text>'+
+            '<text x="56" y="118" font-size="14" text-anchor="middle">⛺</text><text x="56" y="132" font-size="6" text-anchor="middle" fill="#5a3d28">Quinta</text>'+
+            '<text x="16" y="15" font-size="6" fill="#2f6b8a">Oceano Atlântico</text>'+
+            '<text x="150" y="147" font-size="6" fill="#6b8a5a" text-anchor="middle">Praia do Magoito · Terrugem</text>'+
+            '<g transform="translate(150,56)"><rect x="-27" y="-9" width="54" height="18" rx="9" fill="#f6efdc" stroke="#c9a24a"/><text x="0" y="4" font-size="8" text-anchor="middle" fill="#5a3d28">⏳ ± 10 min</text></g>'+
+          '</svg>'+
+          '<div class="legend">'+
+          '<div class="row"><img src="'+A+'i_bishop.png" alt=""><small><b>Igreja Matriz de São João Baptista das Lampas</b><br>Av. Central, 2705-737 · São João das Lampas</small></div>'+
+          '<div class="row"><img src="'+A+'i_tent.png" alt=""><small><b>Quinta da Praia</b><br>Est. da Aguda, R. do Roligo 52 · 2705-623 Fontanelas</small></div>'+
+          '<div class="row"><img src="'+A+'i_hourglass.png" alt=""><small>Percurso da Igreja à Quinta ± 10 min</small></div>'+
+          '<div class="row"><img src="'+A+'i_car.png" alt=""><small>Estacionamento livre na Igreja e na Quinta</small></div>'+
+          '</div>';
+      }},
+
+    { id:'prep', cnr:['⏱','🎲'], build:function(){
+        return '<div class="role"><img src="'+A+'i_chest.png" alt=""><span>Preparação do Tabuleiro</span></div>'+
+          '<div class="phases">'+
+          '<div><b>10H</b><i>Chegada à Igreja</i></div>'+
+          '<div><b>12H</b><i>Chegada à Quinta</i></div>'+
+          '<div><b>13H</b><i>Almoço</i></div>'+
+          '<div><b>19H</b><i>Ceia</i></div>'+
+          '<div><b>20H</b><i>Corte do Bolo</i></div>'+
+          '<div><b>22H</b><i>Fim da Partida</i></div>'+
+          '</div>'+
+          '<hr class="rule">'+
+          '<p style="font-size:12px;font-style:italic">Penalização: chegar tarde à igreja faz perder o turno. Reúne com o grupo na Quinta.</p>';
+      }},
+
+    { id:'regras', cnr:['♥','♠'], build:function(){
+        return '<div class="role"><img src="'+A+'i_herald.png" alt=""><span>Objetivos</span></div>'+
+          '<p style="font-size:13px">Une forças no jogo mais importante de Miguel &amp; Sofia e ajuda-os a alcançar um dia inesquecível. <b>Cooperação total</b>, diversão incorporada.</p>'+
+          '<div class="role" style="margin-top:6px"><img src="'+A+'i_referee.png" alt=""><span>Regras da Casa</span></div>'+
+          '<div class="ruleslist">'+
+          '<div class="r"><span style="color:#c0392b">♥</span><div>Descarta do baralho as cartas de <b>orgulho</b>, <b>teimosia</b> e <b>drama</b>.</div></div>'+
+          '<div class="r"><span>♣</span><div>Evita bloqueios estratégicos no buffet.</div></div>'+
+          '<div class="r"><span style="color:#c0392b">♦</span><div>Cada foto é uma recordação — junta-as e ganha bónus.</div></div>'+
+          '<div class="r"><span>♠</span><div>A pista de dança é zona neutra: invadam livremente.</div></div>'+
+          '<div class="r"><span>🎴</span><div><b>Regra da Casa:</b> apostar nos noivos é sempre uma boa jogada.</div></div>'+
+          '</div>';
+      }},
+
+    { id:'rsvp', cnr:['+2','🃏'], build:function(){
+        return '<h2>Chegou a vossa vez!</h2>'+
+          '<p>Lancem o dado e registem a jogada até <b>12/03/2027</b>.</p>'+
+          '<div class="uno"><img src="'+A+'i_unocard.png" alt="+2"></div>'+
+          '<p style="font-style:italic">Jogam connosco ou ficam de fora?</p>'+
+          '<div class="rsvp">'+
+            '<button type="button" class="yes" data-attend="yes">🎲 VAMOS JOGAR</button>'+
+            '<button type="button" class="no" data-attend="no">🏳 PASSAMOS A VEZ</button>'+
+          '</div>'+
+          '<div class="rsvp-status" id="rsvpStatus"></div>'+
+          '<p class="mono" style="margin-top:8px">Para jogadores extra, contactar os noivos.</p>';
+      }},
+
+    { id:'end', cnr:['♟','♜'], build:function(){
+        return '<div class="finale"><img src="'+A+'rook.png" alt="torre"><img src="'+A+'chip.png" alt="ficha M&amp;S"><img src="'+A+'die.png" alt="dado"></div>'+
+          '<h2>Sem ti, o jogo<br>não fica… completo.</h2>'+
+          '<p style="font-style:italic">Miguel <img class="amp" src="'+A+'amp.jpg" alt="&amp;"> Sofia · 12·06·2027</p>'+
+          '<div class="badges3" style="margin-top:4px"><img src="'+A+'b_convidados.png" alt=""><img src="'+A+'b_age.png" alt=""><img src="'+A+'b_time.png" alt=""></div>';
+      }}
+  ];
+
+  var QUIPS=["Yahtzee!","Xeque-mate.","UNO!","É a tua vez.","Player 2 entrou no jogo.","Do not pass GO.","Casa da sorte.","Full house.","Bingo!","Duplo 6.","+4 para ti.","Level up."];
+
+  /* ---------- flow ---------- */
+  var curtain=document.getElementById('curtain'),env=document.getElementById('env'),
+      card=document.getElementById('card'),inner=document.getElementById('cardInner'),
+      cnrTL=document.getElementById('cnrTL'),cnrBR=document.getElementById('cnrBR'),
+      carrier=document.getElementById('carrier'),hud=document.getElementById('hud'),
+      pipsEl=document.getElementById('pips'),tapHint=document.getElementById('tapHint'),
+      quip=document.getElementById('quip'),
+      btnNext=document.getElementById('next'),btnPrev=document.getElementById('prev');
+  var idx=-1,busy=false,autoTimer=null,started=false,manual=false,identified=false;
+
+  steps.forEach(function(_,i){var d=document.createElement('i');d.addEventListener('click',function(){manual=true;stopAuto();go(i);});pipsEl.appendChild(d);});
+  function paintPips(){[].forEach.call(pipsEl.children,function(d,i){d.className=i===idx?'act':'';});}
+  function setCnr(a){
+    cnrTL.innerHTML=String(a[0]).replace(/(10|.)([♠♥♦♣])/,'$1<br>$2');
+    cnrBR.innerHTML=String(a[1]).replace(/(10|.)([♠♥♦♣])/,'$1<br>$2');
+  }
+  function showQuip(){ if(idx<=0)return; quip.textContent=QUIPS[(idx-1)%QUIPS.length];
+    quip.classList.remove('show');void quip.offsetWidth;quip.classList.add('show'); }
+
+  function renderStep(i){
+    var s=steps[i];
+    setCnr(player&&i===0?[cardLabel(player),cardLabel(player)]:s.cnr);
+    inner.innerHTML=s.build();
+    dropTiles(inner);
+    if(s.id==='greet') wireGreet();
+    if(s.id==='rsvp') wireRsvp();
+    btnPrev.disabled = i===0;
+    btnNext.textContent = i===steps.length-1 ? 'FIM' : 'SEGUINTE ›';
+    if(i>0) tapHint.hidden = (i===steps.length-1);
+  }
+
+  function go(i){
+    if(busy||i<0||i>=steps.length||i===idx)return;
+    if(i>0 && !identified){ flash(); return; }
+    busy=true;stopAuto();
+    if(idx>=0){card.classList.add('leaving');card.classList.remove('show');}
+    carrier.classList.remove('flash');void carrier.offsetWidth;
+    setCarrier(identified?player:undefined);
+    carrier.classList.add('flash');
+    showQuip();
+    setTimeout(function(){
+      card.classList.remove('leaving');
+      idx=i;renderStep(i);paintPips();
+      void card.offsetWidth;card.classList.add('show');
+      busy=false;
+      if(i>0 && i<steps.length-1) scheduleAuto();
+    }, idx>=0?170:110);
+  }
+  function flash(){card.animate([{transform:'translate(-50%,-52%) scale(1)'},{transform:'translate(-50%,-52%) scale(1.02) rotate(-1deg)'},{transform:'translate(-50%,-52%) scale(1)'}],{duration:220});}
+  function scheduleAuto(){stopAuto();if(manual)return;autoTimer=setTimeout(function(){if(idx<steps.length-1)go(idx+1);},7200);}
+  function stopAuto(){if(autoTimer){clearTimeout(autoTimer);autoTimer=null;}}
+
+  function wireRsvp(){
+    var who = player ? player.names.join(' & ') : '';
+    var buttons=[].slice.call(document.querySelectorAll('.rsvp button'));
+    var status=document.getElementById('rsvpStatus');
+
+    function mailtoFallback(attend){
+      var body = attend==='yes'
+        ? "Ola Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nCarta: "+(player?cardLabel(player):"-")+"\nConfirmo presenca em 12/06/2027: SIM\nNo de acompanhantes: \nRestricoes alimentares: \n\nAte ao tabuleiro!"
+        : "Ola Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nInfelizmente nao vamos conseguir jogar em 12/06/2027.\nUm abraco!";
+      window.location.href = MAILTO+encodeURIComponent(body);
+    }
+
+    buttons.forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var attend=btn.dataset.attend;
+        if(!RSVP_ENDPOINT){ mailtoFallback(attend); return; }
+        buttons.forEach(function(b){b.disabled=true;});
+        status.className='rsvp-status';
+        status.textContent='A lançar o dado…';
+        fetch(RSVP_ENDPOINT,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({names:who||'(nome nao identificado)',card:player?cardLabel(player):'',attending:attend})
+        }).then(function(r){ if(!r.ok) throw new Error('http '+r.status); return r.json(); })
+          .then(function(res){
+            if(!res || res.ok!==true) throw new Error((res&&res.error)||'falhou');
+            status.className='rsvp-status ok';
+            status.textContent = attend==='yes' ? '🎲 Jogada registada — até lá!' : 'Registado. Vamos sentir a vossa falta.';
+          })
+          .catch(function(){
+            status.className='rsvp-status err';
+            status.textContent='Não foi possível enviar — a abrir o email…';
+            buttons.forEach(function(b){b.disabled=false;});
+            setTimeout(function(){ mailtoFallback(attend); },900);
+          });
+      });
+    });
+  }
+
+  function wireGreet(){
+    if(identified)return;
+    var wrap=document.createElement('div');wrap.className='nc';
+    wrap.innerHTML='<input id="ncq" type="text" placeholder="O teu nome (ex.: Nuno)" autocomplete="off" spellcheck="false">'+
+                   '<button id="ncgo">PROCURAR</button><div class="res" id="ncres"></div>';
+    inner.appendChild(wrap);
+    var q=document.getElementById('ncq'),go2=document.getElementById('ncgo'),res=document.getElementById('ncres');
+    function run(){
+      var r=search(q.value);
+      if(r.t==='empty'){res.className='res ask';res.textContent='Escreve o teu nome.';return;}
+      if(r.t==='ok'){ identify(r.g); return; }
+      if(r.t==='ask'){
+        res.className='res ask';
+        res.innerHTML='Há mais do que um jogador. Toca no teu nome:<br>'+
+          r.list.map(function(g,k){return '<span class="opt" data-k="'+k+'">'+g.names.join(' & ')+'</span>';}).join('');
+        res.querySelectorAll('.opt').forEach(function(el){el.addEventListener('click',function(){identify(r.list[+el.dataset.k]);});});
+        return;
+      }
+      res.className='res no';
+      res.innerHTML='<b>GAME OVER</b> — não encontrámos "'+q.value.trim()+'" no baralho.<br>'+
+        '<span class="opt" id="joker">Entrar como JOKER</span> ou confirmar com os noivos.';
+      document.getElementById('joker').addEventListener('click',function(){ identify(null); });
+    }
+    go2.addEventListener('click',run);
+    q.addEventListener('keydown',function(e){if(e.key==='Enter')run();});
+    setTimeout(function(){try{q.focus();}catch(e){}},400);
+  }
+  function identify(g){
+    player=g; identified=true;
+    setCarrier(player);
+    inner.innerHTML=steps[0].build();
+    dropTiles(inner);
+    setCnr([cardLabel(player),cardLabel(player)]);
+    btnNext.disabled=false; tapHint.hidden=false;
+    carrier.classList.remove('flash');void carrier.offsetWidth;carrier.classList.add('flash');
+    quip.textContent = player ? ('A tua carta: '+cardLabel(player)) : 'Curinga selvagem!';
+    quip.classList.remove('show');void quip.offsetWidth;quip.classList.add('show');
+  }
+
+  function begin(){
+    if(started)return;started=true;
+    curtain.classList.add('open');
+    setTimeout(function(){curtain.classList.add('gone');},1600);
+    setTimeout(function(){env.classList.add('opened');},1300);
+    setTimeout(function(){hud.classList.add('on');go(0);btnNext.disabled=true;},2000);
+  }
+  document.getElementById('startBtn').addEventListener('click',begin);
+
+  btnNext.addEventListener('click',function(){manual=true;stopAuto();go(idx+1);});
+  btnPrev.addEventListener('click',function(){manual=true;stopAuto();go(idx-1);});
+  document.getElementById('replay').addEventListener('click',function(){
+    stopAuto();
+    curtain.classList.remove('gone','open');curtain.classList.add('closing');
+    setTimeout(function(){
+      curtain.classList.remove('closing');
+      card.classList.remove('show');idx=-1;started=false;manual=false;identified=false;player=null;
+      setCarrier(undefined);env.classList.remove('opened');
+      hud.classList.remove('on');tapHint.hidden=true;
+      begin();
+    },1500);
+  });
+  document.getElementById('stage').addEventListener('click',function(e){
+    if(!started||busy)return;
+    if(e.target.closest('.nc')||e.target.closest('a')||e.target.closest('.rsvp')||e.target.closest('button'))return;
+    if(idx===0 && !identified)return;
+    tapHint.hidden=true;
+    if(idx<steps.length-1) go(idx+1);
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'){manual=true;stopAuto();go(idx+1);}
+    if(e.key==='ArrowLeft'){manual=true;stopAuto();go(idx-1);}
+  });
+})();
+</script>
 </body>
 </html>
