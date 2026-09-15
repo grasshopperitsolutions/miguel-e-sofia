@@ -1,12 +1,12 @@
 # RSVP relay (Cloudflare Worker)
 
-> **Not currently in use.** The site now hosts on Vercel and `final/index.html`
-> points `RSVP_ENDPOINT` at `/api/rsvp` (see `../api/rsvp.js` and the root
-> `README.md`). This Worker is kept as a ready-to-deploy alternative in case
-> the site ever runs somewhere without native function support again.
+> **Not deployed by default.** `final/index.html` has `RSVP_ENDPOINT = ""`,
+> so RSVP buttons use plain `mailto:` links until this Worker is deployed and
+> its URL pasted in. The site itself is back on plain GitHub Pages — no
+> server of its own — so this Worker (free tier) is the option if you want
+> real emails without adding one.
 
-Why this exists: a static page with no server of its own — like this one used
-to be, on GitHub Pages — can't
+Why this exists: a static page with no server of its own can't
 hold a secret, and **Resend's API doesn't send CORS headers**, so the browser
 refuses a direct `fetch()` to `api.resend.com` no matter how the key is
 scoped (send-only or not — CORS is a browser rule, not a key permission).

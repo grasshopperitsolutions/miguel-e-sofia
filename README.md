@@ -31,30 +31,21 @@ Cada app é **um único ficheiro HTML** autónomo (CSS + JS inline, foto do casa
 
 ## RSVP por email (`final/`)
 
-Os botões "VAMOS JOGAR" / "PASSAMOS A VEZ" em `final/` chamam `api/rsvp.js` (`RSVP_ENDPOINT = "/api/rsvp"`, mesmo domínio) que envia por **Resend**. Se essa chamada falhar por algum motivo, cai automaticamente para `mailto:`.
+Os botões "VAMOS JOGAR" / "PASSAMOS A VEZ" em `final/` abrem um email (`mailto:`) **sem destinatário** — preencher com o email dos noivos (procurar `var MAILTO`).
 
-O Resend não pode ser chamado diretamente do browser (não envia headers CORS — bloqueado independentemente do scope da API key), daí a função. Precisa de duas environment variables no projeto Vercel — ver secção seguinte. Existe também `rsvp-worker/`, a mesma função como Cloudflare Worker (alternativa caso o site volte a correr fora da Vercel); não está em uso enquanto `RSVP_ENDPOINT` apontar para `/api/rsvp`.
+Para RSVP por email de verdade (via **Resend**) sem servidor próprio: `rsvp-worker/` tem a mesma lógica como Cloudflare Worker (free tier). O Resend não pode ser chamado diretamente do browser (não envia headers CORS), daí precisar de um relay. Ver `rsvp-worker/README.md` para o deploy — depois só falta colar o URL do Worker em `var RSVP_ENDPOINT` no `final/index.html`. Não está em uso por omissão (`RSVP_ENDPOINT = ""`), os botões caem sempre para `mailto:`.
 
-## Hosting — Vercel
+*(Já experimentámos alojar isto na Vercel com uma função equivalente — funcionava, mas o plano Pro só inclui um "deploying seat"; qualquer outra pessoa a fazer deploy precisa de lugar pago adicional. Voltámos ao GitHub Pages por isso.)*
 
-O repositório é **privado** e está ligado a um projeto Vercel (`grasshopperitsolutions/miguel-e-sofia`, equipa `Grasshopper 's projects`, plano Pro) via a GitHub App da Vercel. Cada push a `main` faz deploy automático — sem build, sem workflow do GitHub Actions (o antigo `.github/workflows/deploy.yml` de GitHub Pages foi removido; Pages não publica a partir de repos privados em contas gratuitas).
+## Hosting — GitHub Pages
 
-**Environment variables a configurar no dashboard da Vercel** (Project → Settings → Environment Variables), para o RSVP funcionar:
+Repositório **público** (GitHub Pages não publica a partir de repos privados em contas gratuitas).
 
-| Nome | Obrigatória | Valor |
-|---|---|---|
-| `RESEND_API_KEY` | sim | a tua key da Resend (send-only) |
-| `TO_EMAIL` | sim | o email que deve receber cada RSVP |
-| `FROM_EMAIL` | não | por omissão usa `onboarding@resend.dev` — funciona sem verificar domínio, porque todos os RSVP vão para um único destinatário fixo (o dono da conta Resend) |
-| `ALLOWED_ORIGIN` | não | por omissão `*`; só importa se `api/rsvp.js` for chamado a partir de outro domínio |
-
-Depois de adicionar/alterar variáveis, é preciso um **redeploy** (novo push, ou "Redeploy" no dashboard) para entrarem em vigor.
-
-**Proteção de acesso**: por omissão a Vercel protege os deploys de repos privados com Vercel Authentication (só quem tem login na equipa consegue abrir o URL) — foi **desativada** neste projeto para o convite ficar acessível a qualquer convidado com o link. Se no futuro quiseres um site realmente privado (não só o código), ativa Password Protection ou Vercel Authentication em Project → Settings → Deployment Protection.
+**Settings → Pages → Build and deployment → Source: "Deploy from a branch" → Branch: `main` / `(root)`.** Não é preciso workflow do GitHub Actions nem build — o `.nojekyll` na raiz garante que os ficheiros são servidos tal como estão.
 
 ### Domínio próprio (opcional)
 
-Project → Settings → Domains, na Vercel. SSL é automático.
+Adicionar um ficheiro `CNAME` na raiz com o domínio e configurar o DNS (registo `A`/`ALIAS` para o apex a apontar para os IPs do GitHub Pages, `CNAME` para subdomínios a apontar para `<org>.github.io`).
 
 ## Desenvolvimento local
 
@@ -63,5 +54,3 @@ Abrir `index.html` diretamente no browser, ou servir a pasta:
 ```bash
 npx serve .
 ```
-
-Isto serve os ficheiros estáticos mas não `api/rsvp.js` (só existe como Vercel Function). Para testar o RSVP localmente: `npx vercel dev` (pede login Vercel; lê as environment variables do projeto ligado).

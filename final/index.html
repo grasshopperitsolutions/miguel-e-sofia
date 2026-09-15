@@ -323,11 +323,11 @@
   var MAP_CH="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(CHURCH);
   var MAP_Q ="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(QUINTA);
   var MAILTO="mailto:?subject="+encodeURIComponent("RSVP · M&S — O Jogo")+"&body=";
-  // Same-origin Vercel function (api/rsvp.js) — works as soon as
-  // RESEND_API_KEY + TO_EMAIL are set in the Vercel project's environment
-  // variables. If that fetch fails for any reason, the buttons fall back
-  // to a plain mailto: link automatically.
-  var RSVP_ENDPOINT="/api/rsvp";
+  // Back on GitHub Pages: no server, so no relay to point at — RSVP
+  // buttons use plain mailto: links (see mailtoFallback below). Set this
+  // to a deployed rsvp-worker/ (Cloudflare Worker) URL to send real
+  // emails via Resend instead; see rsvp-worker/README.md.
+  var RSVP_ENDPOINT="";
 
   function greetCard(){
     if(!player && !identified){
