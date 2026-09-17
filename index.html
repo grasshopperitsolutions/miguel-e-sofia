@@ -110,8 +110,8 @@
   .card.leaving{transform:translate(-165%,-70%) rotate(-15deg) scale(.9);opacity:0}
   /* inner gold frame — the boardgame-box look */
   .card::before{content:"";position:absolute;inset:9px;border:1.5px solid var(--gold-dk);border-radius:8px;opacity:.6;pointer-events:none;z-index:3}
-  .card .cnr{position:absolute;font-family:var(--display);font-weight:900;font-size:15px;line-height:.82;color:var(--red-deep);z-index:4}
-  .card .cnr.tl{top:9px;left:12px}.card .cnr.br{bottom:9px;right:12px;transform:rotate(180deg)}
+  .card .cnr{position:absolute;font-family:var(--display);font-weight:900;font-size:19px;line-height:.86;color:var(--red-deep);z-index:4}
+  .card .cnr.tl{top:14px;left:16px}.card .cnr.br{bottom:14px;right:16px;transform:rotate(180deg)}
   .card .inner{flex:1;padding:26px 19px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;overflow:auto}
   .card .inner::-webkit-scrollbar{width:0}
   .card h2{font-family:var(--display);font-weight:700;color:var(--red-deep);margin:0;font-size:clamp(20px,5.4vw,28px);line-height:1.12}
@@ -127,8 +127,9 @@
   .gico{width:auto;vertical-align:middle}
 
   /* scrabble tiles */
-  .scrab{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin:2px 0}
-  .stile{width:30px;height:30px;background:linear-gradient(160deg,#f6ecc9,#e6d29a);border-radius:5px;border:1px solid #b99a58;
+  .scrab-rows{display:flex;flex-direction:column;gap:8px;margin:6px 0;width:100%}
+  .scrab{display:flex;gap:4px;justify-content:center;flex-wrap:nowrap;margin:2px 0}
+  .stile{width:30px;height:30px;flex:0 0 auto;min-width:0;background:linear-gradient(160deg,#f6ecc9,#e6d29a);border-radius:5px;border:1px solid #b99a58;
     box-shadow:0 3px 0 #a5843f;font-family:var(--display);font-weight:700;font-size:17px;color:#7a5a1e;
     display:flex;align-items:center;justify-content:center;position:relative;transform:translateY(-90px);opacity:0}
   .stile.drop{animation:drop .45s cubic-bezier(.3,1.4,.5,1) forwards}
@@ -292,6 +293,20 @@
     }).join('')+'</div>';
   }
   function dropTiles(scope){scope.querySelectorAll('.stile').forEach(function(t,i){setTimeout(function(){t.classList.add('drop');},i*70);});}
+  function fitScrabRows(scope){
+    scope.querySelectorAll('.scrab-rows').forEach(function(rows){
+      var w=rows.clientWidth; if(!w)return;
+      var gap=4, rowEls=[].slice.call(rows.querySelectorAll('.scrab'));
+      var size=rowEls.reduce(function(min,row){
+        var n=row.children.length; if(!n)return min;
+        return Math.min(min,Math.floor((w-gap*(n-1))/n));
+      },30);
+      size=Math.max(12,Math.min(30,size));
+      rowEls.forEach(function(row){
+        [].forEach.call(row.children,function(t){t.style.width=t.style.height=size+'px';t.style.fontSize=Math.max(9,Math.round(size*.56))+'px';});
+      });
+    });
+  }
   function firstName(n){return (n||'').split(' ')[0];}
 
   /* ---------- guest search ---------- */
@@ -339,10 +354,10 @@
         '<p class="mono">Entras como JOKER 🃏. Fala com os noivos para confirmar o teu lugar.</p>'+
         '<p><b>Prepara os dados!</b> 🎲</p>';
     }
-    var fn=firstName(player.names[0]);
-    var withtxt = player.names.length>1 ? '<p class="mono">'+player.names.join('  &  ')+'</p>' : '';
-    return '<h3>Atenção, Jogador</h3>'+
-      tilesHTML(fn)+ withtxt +
+    var fns=player.names.map(firstName);
+    var namesHTML='<div class="scrab-rows">'+fns.map(function(n,i){return tilesHTML(i<fns.length-1?n+'&':n);}).join('')+'</div>';
+    return '<h3>Atenção, '+(fns.length>1?'Jogadores':'Jogador')+'</h3>'+
+      namesHTML+
       '<p>a tua presença é requisitada no tabuleiro</p>'+
       '<h2 style="font-size:clamp(18px,4.8vw,24px)">M&amp;S — O Jogo</h2>'+
       '<p class="mono">EXPANSÃO: ALIANÇA ESTRATÉGICA</p>'+
@@ -482,6 +497,7 @@
     setCnr(player&&i===0?[cardLabel(player),cardLabel(player)]:s.cnr);
     inner.innerHTML=s.build();
     dropTiles(inner);
+    fitScrabRows(inner);
     if(s.id==='greet') wireGreet();
     if(s.id==='rsvp') wireRsvp();
     btnPrev.disabled = i===0;
@@ -560,6 +576,7 @@
     setCarrier(player);
     inner.innerHTML=steps[0].build();
     dropTiles(inner);
+    fitScrabRows(inner);
     setCnr([cardLabel(player),cardLabel(player)]);
     btnNext.disabled=false; tapHint.hidden=false;
     carrier.classList.remove('flash');void carrier.offsetWidth;carrier.classList.add('flash');
