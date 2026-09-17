@@ -373,7 +373,7 @@
   var QUINTA="Quinta da Praia, Estrada da Aguda, Rua do Roligo 52, 2705-623 Fontanelas";
   var MAP_CH="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(CHURCH);
   var MAP_Q ="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(QUINTA);
-  var RSVP_WHATSAPP="+33767834576";
+  var RSVP_WHATSAPP="+351964412547";
 
   function greetCard(){
     if(!player && !identified){
@@ -570,7 +570,7 @@
       btn.addEventListener('click',function(){
         var attend=btn.dataset.attend;
         var msg = attend==='yes'
-          ? "Olá Miguel e Sofia! 🎲\n\nJogador(es): "+(who||"(escrever nome)")+"\nCarta: "+(player?cardLabel(player):"-")+"\nConfirmo presença em 06/06/2027: SIM\nNº de acompanhantes: \nRestrições alimentares: \n\nAté ao tabuleiro!"
+          ? "Olá Miguel e Sofia! 🎲\n\nJogador(es): "+(who||"(escrever nome)")+"\nCarta: "+(player?cardLabel(player):"-")+"\nConfirmo presença em 06/06/2027: SIM\nNº de acompanhantes extra: \nRestrições alimentares: \n\nAté ao tabuleiro!"
           : "Olá Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nInfelizmente não vamos conseguir jogar em 06/06/2027.\nUm abraço!";
         status.className='rsvp-status ok';
         status.textContent = attend==='yes' ? '🎲 A abrir o WhatsApp…' : 'A abrir o WhatsApp…';
