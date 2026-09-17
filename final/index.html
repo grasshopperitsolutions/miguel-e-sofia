@@ -322,12 +322,7 @@
   var QUINTA="Quinta da Praia, Estrada da Aguda, Rua do Roligo 52, 2705-623 Fontanelas";
   var MAP_CH="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(CHURCH);
   var MAP_Q ="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(QUINTA);
-  var MAILTO="mailto:?subject="+encodeURIComponent("RSVP · M&S — O Jogo")+"&body=";
-  // Back on GitHub Pages: no server, so no relay to point at — RSVP
-  // buttons use plain mailto: links (see mailtoFallback below). Set this
-  // to a deployed rsvp-worker/ (Cloudflare Worker) URL to send real
-  // emails via Resend instead; see rsvp-worker/README.md.
-  var RSVP_ENDPOINT="";
+  var RSVP_WHATSAPP="+33767834576";
 
   function greetCard(){
     if(!player && !identified){
@@ -520,36 +515,15 @@
     var buttons=[].slice.call(document.querySelectorAll('.rsvp button'));
     var status=document.getElementById('rsvpStatus');
 
-    function mailtoFallback(attend){
-      var body = attend==='yes'
-        ? "Ola Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nCarta: "+(player?cardLabel(player):"-")+"\nConfirmo presenca em 12/06/2027: SIM\nNo de acompanhantes: \nRestricoes alimentares: \n\nAte ao tabuleiro!"
-        : "Ola Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nInfelizmente nao vamos conseguir jogar em 12/06/2027.\nUm abraco!";
-      window.location.href = MAILTO+encodeURIComponent(body);
-    }
-
     buttons.forEach(function(btn){
       btn.addEventListener('click',function(){
         var attend=btn.dataset.attend;
-        if(!RSVP_ENDPOINT){ mailtoFallback(attend); return; }
-        buttons.forEach(function(b){b.disabled=true;});
-        status.className='rsvp-status';
-        status.textContent='A lançar o dado…';
-        fetch(RSVP_ENDPOINT,{
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({names:who||'(nome nao identificado)',card:player?cardLabel(player):'',attending:attend})
-        }).then(function(r){ if(!r.ok) throw new Error('http '+r.status); return r.json(); })
-          .then(function(res){
-            if(!res || res.ok!==true) throw new Error((res&&res.error)||'falhou');
-            status.className='rsvp-status ok';
-            status.textContent = attend==='yes' ? '🎲 Jogada registada — até lá!' : 'Registado. Vamos sentir a vossa falta.';
-          })
-          .catch(function(){
-            status.className='rsvp-status err';
-            status.textContent='Não foi possível enviar — a abrir o email…';
-            buttons.forEach(function(b){b.disabled=false;});
-            setTimeout(function(){ mailtoFallback(attend); },900);
-          });
+        var msg = attend==='yes'
+          ? "Olá Miguel e Sofia! 🎲\n\nJogador(es): "+(who||"(escrever nome)")+"\nCarta: "+(player?cardLabel(player):"-")+"\nConfirmo presença em 12/06/2027: SIM\nNº de acompanhantes: \nRestrições alimentares: \n\nAté ao tabuleiro!"
+          : "Olá Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nInfelizmente não vamos conseguir jogar em 12/06/2027.\nUm abraço!";
+        status.className='rsvp-status ok';
+        status.textContent = attend==='yes' ? '🎲 A abrir o WhatsApp…' : 'A abrir o WhatsApp…';
+        window.open('https://wa.me/'+RSVP_WHATSAPP.replace(/[^\d]/g,'')+'?text='+encodeURIComponent(msg), '_blank');
       });
     });
   }

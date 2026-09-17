@@ -29,13 +29,11 @@ Cada app é **um único ficheiro HTML** autónomo (CSS + JS inline, foto do casa
 
 - Os botões de RSVP abrem um email (`mailto:`) **sem destinatário** — preencher com o email dos noivos (procurar `var MAILTO` / `var mailto`).
 
-## RSVP por email (`final/`)
+## RSVP por WhatsApp (`final/` e raiz)
 
-Os botões "VAMOS JOGAR" / "PASSAMOS A VEZ" em `final/` abrem um email (`mailto:`) **sem destinatário** — preencher com o email dos noivos (procurar `var MAILTO`).
+Os botões "VAMOS JOGAR" / "PASSAMOS A VEZ" abrem um link `wa.me` com uma mensagem pt-PT pré-preenchida (nome do(s) convidado(s), carta e sim/não) — sem servidor, sem chaves, nada para configurar. O número está em `var RSVP_WHATSAPP` no `<script>` (perto do topo). Para trocar o número, editar essa linha em `final/index.html` e em `index.html` (a raiz é uma cópia do conteúdo de `final/`).
 
-Para RSVP por email de verdade (via **Resend**) sem servidor próprio: `rsvp-worker/` tem a mesma lógica como Cloudflare Worker (free tier). O Resend não pode ser chamado diretamente do browser (não envia headers CORS), daí precisar de um relay. Ver `rsvp-worker/README.md` para o deploy — depois só falta colar o URL do Worker em `var RSVP_ENDPOINT` no `final/index.html`. Não está em uso por omissão (`RSVP_ENDPOINT = ""`), os botões caem sempre para `mailto:`.
-
-*(Já experimentámos alojar isto na Vercel com uma função equivalente — funcionava, mas o plano Pro só inclui um "deploying seat"; qualquer outra pessoa a fazer deploy precisa de lugar pago adicional. Voltámos ao GitHub Pages por isso.)*
+*(Chegámos a montar um relay por email — primeiro Cloudflare Worker, depois função Vercel — mas o WhatsApp é mais simples: zero infraestrutura. O código do relay por Resend fica em `rsvp-worker/` caso um dia volte a fazer sentido, mas não está em uso.)*
 
 ## Hosting — GitHub Pages
 
