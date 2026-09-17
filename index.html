@@ -4,20 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>M&amp;S — O Jogo  ·  Convite de Casamento</title>
-<meta name="description" content="Miguel Comba &amp; Sofia Moreira — 12 de Junho de 2027. M&S, O Jogo · Expansão: Aliança Estratégica.">
+<meta name="description" content="Miguel Comba &amp; Sofia Moreira — 6 de Junho de 2027. M&S, O Jogo · Expansão: Aliança Estratégica.">
 <meta name="robots" content="noindex">
 <meta property="og:title" content="M&amp;S — O Jogo">
-<meta property="og:description" content="A tua presença é requisitada no tabuleiro. 12 de Junho de 2027.">
+<meta property="og:description" content="A tua presença é requisitada no tabuleiro. 6 de Junho de 2027.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%B2%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Fonts identified from the original invitation assets:
      · game / UI text  -> IBM Plex Mono   (swap in ../ if the real one turns out to be Fira Mono / Ubuntu Mono)
-     · couple names     -> Playfair Display
-     · section headers  -> EB Garamond
-     · arcade bits      -> Press Start 2P / Cinzel wordmark -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Press+Start+2P&display=swap" rel="stylesheet">
+     · standard font    -> IM Fell English (self-hosted, fonts/IM_Fell_English/)
+     · arcade bits      -> Press Start 2P (self-hosted) / Cinzel wordmark
+     · card suits/naipe -> Play (self-hosted, fonts/Play/) -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  @font-face{font-family:'IM Fell English';font-style:normal;font-weight:400;font-display:swap;
+    src:url('fonts/IM_Fell_English/IMFellEnglish-Regular.ttf') format('truetype')}
+  @font-face{font-family:'IM Fell English';font-style:italic;font-weight:400;font-display:swap;
+    src:url('fonts/IM_Fell_English/IMFellEnglish-Italic.ttf') format('truetype')}
+  @font-face{font-family:'Press Start 2P';font-style:normal;font-weight:400;font-display:swap;
+    src:url('fonts/Press_Start_2P/PressStart2P-Regular.ttf') format('truetype')}
+  @font-face{font-family:'Play';font-style:normal;font-weight:400;font-display:swap;
+    src:url('fonts/Play/Play-Regular.ttf') format('truetype')}
+  @font-face{font-family:'Play';font-style:normal;font-weight:700;font-display:swap;
+    src:url('fonts/Play/Play-Bold.ttf') format('truetype')}
   :root{
     --kraft:#c69a6b; --kraft-2:#bb8b58; --kraft-edge:#9c7040;
     --paper:#f3ead2; --paper-2:#e9dcbb; --card:#f6efdc;
@@ -25,15 +35,17 @@
     --gold:#c9a24a; --gold-lt:#e6c877; --gold-dk:#a9832f;
     --ink:#241d17; --ink-soft:#4a3826; --green:#2f6b3f;
     --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
-    --display:'Playfair Display',Georgia,serif;
-    --serif:'EB Garamond',Georgia,serif;
+    --display:'IM Fell English',Georgia,serif;
+    --serif:'IM Fell English',Georgia,serif;
+    --retro:'Press Start 2P',monospace;
+    --naipe:'Play',Georgia,serif;
     --shadow:0 14px 40px rgba(40,20,10,.4);
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;height:100%}
   body{
     font-family:var(--serif);color:var(--ink);
-    background:#d8c9a6 url("final/assets/hexbg.jpg") center/cover fixed no-repeat;
+    background:#d8c9a6 url("./assets/hexbg.jpg") center/cover fixed no-repeat;
     overflow:hidden;
   }
 
@@ -50,11 +62,11 @@
   #curtain.closing .drape.l,#curtain.closing .drape.r{transform:translateX(0)}
   #curtain.gone{opacity:0;pointer-events:none;transition:opacity .5s .9s}
   .startbox{position:relative;z-index:2;text-align:center;color:#f4ecd8;padding:20px}
-  .startbox .coin{font-family:'Press Start 2P',monospace;font-size:11px;color:var(--gold-lt);animation:blink 1s steps(1) infinite;margin-bottom:22px}
+  .startbox .coin{font-family:var(--retro);font-size:11px;color:var(--gold-lt);animation:blink 1s steps(1) infinite;margin-bottom:22px}
   @keyframes blink{50%{opacity:0}}
   .startbox h1{font-family:'Cinzel',serif;font-weight:900;font-size:clamp(28px,7vw,54px);margin:0 0 6px;color:#f6e7c4;text-shadow:0 3px 0 #6d0e0e,0 7px 20px rgba(0,0,0,.5)}
   .startbox p{font-style:italic;opacity:.85;margin:.2em 0 26px;font-family:var(--serif);font-size:18px}
-  .btn{font-family:'Press Start 2P',monospace;font-size:11px;background:var(--gold);color:#3a2410;border:0;padding:15px 22px;border-radius:6px;cursor:pointer;box-shadow:0 6px 0 #8a6a22,0 12px 22px rgba(0,0,0,.4)}
+  .btn{font-family:var(--retro);font-size:11px;background:var(--gold);color:#3a2410;border:0;padding:15px 22px;border-radius:6px;cursor:pointer;box-shadow:0 6px 0 #8a6a22,0 12px 22px rgba(0,0,0,.4)}
   .btn:active{transform:translateY(4px);box-shadow:0 2px 0 #8a6a22}
 
   /* ===== FLOATING PIECES ===== */
@@ -84,14 +96,14 @@
   /* carrier = the player's own playing card */
   .carrier{position:absolute;left:50%;top:50%;width:72%;aspect-ratio:63/97;transform:translate(-50%,-52%) rotateY(90deg);
     z-index:20;opacity:0;transition:transform .4s ease,opacity .3s;transform-style:preserve-3d}
-  .carrier.flash{animation:carry .62s ease}
+  .carrier.flash{animation:carry 1.5s ease}
   @keyframes carry{0%{opacity:0;transform:translate(-50%,-52%) rotateY(92deg) scale(.96)}
     38%{opacity:1;transform:translate(-50%,-52%) rotateY(0) scale(1)}
     66%{opacity:1;transform:translate(-50%,-52%) rotateY(0) scale(1)}
     100%{opacity:0;transform:translate(-50%,-52%) rotateY(-92deg) scale(.96)}}
   .pcard{position:absolute;inset:0;border-radius:12px;background:#fdfdf8;border:2px solid #2a2a2a;box-shadow:var(--shadow);
     display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .pcard .cnr{position:absolute;font-family:var(--display);font-weight:900;line-height:.82;text-align:center;font-size:clamp(14px,3.8vw,18px)}
+  .pcard .cnr{position:absolute;font-family:var(--naipe);font-weight:700;line-height:.82;text-align:center;font-size:clamp(14px,3.8vw,18px)}
   .pcard .cnr.tl{top:8px;left:10px}
   .pcard .cnr.br{bottom:8px;right:10px;transform:rotate(180deg)}
   .pcard .mid{font-size:clamp(48px,14vw,66px);line-height:1}
@@ -103,22 +115,35 @@
 
   /* content card */
   .card{position:absolute;left:50%;top:50%;width:88%;aspect-ratio:63/97;transform:translate(-50%,140%) scale(.9);
-    background:var(--card) url("final/assets/hexbg.jpg") center/200% no-repeat;background-blend-mode:overlay;
+    background:var(--card) url("./assets/hexbg.jpg") center/200% no-repeat;background-blend-mode:overlay;
     border-radius:14px;border:7px solid var(--gold-lt);box-shadow:var(--shadow),inset 0 0 0 2px var(--gold);
-    z-index:8;opacity:0;transition:transform .6s cubic-bezier(.4,1.1,.4,1),opacity .4s;display:flex;flex-direction:column;overflow:hidden}
+    z-index:8;opacity:0;transition:transform 1.5s cubic-bezier(.4,1.1,.4,1),opacity 1.5s;display:flex;flex-direction:column;overflow:hidden}
   .card.show{transform:translate(-50%,-52%) scale(1);opacity:1}
   .card.leaving{transform:translate(-165%,-70%) rotate(-15deg) scale(.9);opacity:0}
   /* inner gold frame — the boardgame-box look */
   .card::before{content:"";position:absolute;inset:9px;border:1.5px solid var(--gold-dk);border-radius:8px;opacity:.6;pointer-events:none;z-index:3}
-  .card .cnr{position:absolute;font-family:var(--display);font-weight:900;font-size:19px;line-height:.86;color:var(--red-deep);z-index:4}
-  .card .cnr.tl{top:14px;left:16px}.card .cnr.br{bottom:14px;right:16px;transform:rotate(180deg)}
-  .card .inner{flex:1;padding:26px 19px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;overflow:auto}
+  .card .cnr{position:absolute;font-family:var(--naipe);font-weight:700;font-size:28.5px;line-height:1;color:var(--red-deep);z-index:4}
+  .card .cnr.tl{top:16px;left:18px}.card .cnr.br{bottom:16px;right:18px;transform:rotate(180deg)}
+  .card .inner{flex:1;padding:26px clamp(12px,4.5vw,19px) 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;overflow:auto}
   .card .inner::-webkit-scrollbar{width:0}
-  .card h2{font-family:var(--display);font-weight:700;color:var(--red-deep);margin:0;font-size:clamp(20px,5.4vw,28px);line-height:1.12}
-  .card h3{font-family:var(--serif);font-weight:500;color:var(--kraft-edge);margin:2px 0;font-size:13px;letter-spacing:3px;text-transform:uppercase}
-  .card .kicker{font-family:var(--serif);font-size:clamp(24px,6vw,32px);color:var(--gold-dk);margin:0;letter-spacing:.5px}
+  .card h2{font-family:var(--display);font-weight:700;color:var(--red-deep);margin:0;font-size:clamp(17px,5.4vw,28px);line-height:1.12}
+  .card h3{font-family:var(--serif);font-weight:500;color:var(--kraft-edge);margin:2px 0;font-size:clamp(11px,3vw,13px);letter-spacing:2.4px;text-transform:uppercase}
+  .card .kicker{font-family:var(--serif);font-size:clamp(17px,6vw,32px);color:var(--gold-dk);margin:0;letter-spacing:.5px}
   .card p{margin:3px 0;font-size:clamp(13px,3.5vw,15.5px);line-height:1.36}
   .card .mono{font-family:var(--mono);font-size:12px;letter-spacing:0}
+
+  /* retro countdown — fixed bar above everything, always visible during play */
+  .cd-bar{position:fixed;top:0;left:0;right:0;z-index:28;display:flex;flex-direction:column;align-items:center;gap:3px;
+    padding:calc(6px + env(safe-area-inset-top)) 10px 6px;
+    background:linear-gradient(180deg,rgba(36,29,23,.92),rgba(36,29,23,.78) 75%,transparent);
+    opacity:0;pointer-events:none;transition:opacity .5s}
+  .cd-bar.on{opacity:1}
+  .cd-row{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+  .cd-unit{display:flex;flex-direction:column;align-items:center;gap:2px;background:#241d17;border-radius:6px;
+    padding:5px 5px;min-width:36px;box-shadow:inset 0 0 0 2px #000,0 3px 0 rgba(0,0,0,.3)}
+  .cd-num{font-family:var(--retro);font-size:13px;color:var(--gold-lt);text-shadow:0 0 6px rgba(230,200,119,.6)}
+  .cd-lbl{font-family:var(--retro);font-size:6px;color:#c9a24a;letter-spacing:.5px}
+  .cd-tz{font-family:var(--retro);font-size:7px;color:var(--paper);opacity:.75;letter-spacing:.3px}
   .card .big{font-family:var(--display);font-weight:700;font-size:clamp(24px,7vw,33px);color:var(--red-deep)}
   .card .amp{height:1em;vertical-align:-.12em;mix-blend-mode:multiply}
   .card hr.rule{width:62%;border:0;border-top:2px dotted var(--kraft-edge);margin:6px 0}
@@ -132,7 +157,7 @@
   .stile{width:30px;height:30px;flex:0 0 auto;min-width:0;background:linear-gradient(160deg,#f6ecc9,#e6d29a);border-radius:5px;border:1px solid #b99a58;
     box-shadow:0 3px 0 #a5843f;font-family:var(--display);font-weight:700;font-size:17px;color:#7a5a1e;
     display:flex;align-items:center;justify-content:center;position:relative;transform:translateY(-90px);opacity:0}
-  .stile.drop{animation:drop .45s cubic-bezier(.3,1.4,.5,1) forwards}
+  .stile.drop{animation:drop .36s cubic-bezier(.3,1.4,.5,1) forwards}
   @keyframes drop{to{transform:none;opacity:1}}
   .stile sub{position:absolute;right:2px;bottom:0;font-size:8px;font-weight:400}
 
@@ -171,7 +196,7 @@
   /* objetivos / regras with role icons */
   .role{display:flex;gap:10px;align-items:center;justify-content:center;margin-bottom:2px}
   .role img{height:44px;width:auto}
-  .role span{font-family:var(--serif);font-size:clamp(20px,5.5vw,26px);color:var(--gold-dk)}
+  .role span{font-family:var(--serif);font-size:clamp(15px,5.5vw,26px);color:var(--gold-dk)}
   .ruleslist{width:100%;text-align:left;display:flex;flex-direction:column;gap:6px}
   .ruleslist .r{display:flex;gap:8px;font-size:12.5px;line-height:1.3}
   .ruleslist .r span{flex:0 0 16px;text-align:center}
@@ -180,7 +205,7 @@
   .uno img{width:100%;display:block}
 
   .rsvp{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:6px}
-  .rsvp button{text-decoration:none;font-family:var(--mono);font-weight:700;font-size:12px;padding:10px 14px;border-radius:9px;
+  .rsvp button{text-decoration:none;font-family:var(--retro);font-weight:400;font-size:9px;line-height:1.5;padding:11px 14px;border-radius:9px;
     border:0;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.25);transition:transform .1s,opacity .2s}
   .rsvp button:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
   .rsvp button:disabled{opacity:.55;cursor:default;transform:none;box-shadow:0 4px 0 rgba(0,0,0,.25)}
@@ -196,7 +221,7 @@
   /* name-check */
   .nc{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px}
   .nc input{font-family:var(--serif);font-size:16px;padding:10px 12px;border:2px solid var(--kraft-edge);border-radius:9px;background:#fffdf5;width:100%;max-width:250px;text-align:center}
-  .nc button{font-family:var(--mono);font-weight:700;font-size:13px;background:var(--red);color:#fff;border:0;border-radius:9px;padding:10px 18px;cursor:pointer;box-shadow:0 4px 0 var(--red-deep)}
+  .nc button{font-family:var(--retro);font-weight:400;font-size:10px;background:var(--red);color:#fff;border:0;border-radius:9px;padding:11px 18px;cursor:pointer;box-shadow:0 4px 0 var(--red-deep)}
   .nc button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--red-deep)}
   .nc .res{font-size:13px;line-height:1.35;font-family:var(--serif)}
   .nc .res.ask{color:#8a6a1e}.nc .res.no{color:var(--red-deep)}
@@ -211,15 +236,15 @@
   .pips i{width:8px;height:8px;border-radius:50%;background:rgba(120,80,40,.35);transition:.3s;cursor:pointer}
   .pips i.act{background:var(--red-deep);transform:scale(1.4)}
   .nav{display:flex;gap:8px}
-  .nav button{font-family:var(--mono);font-weight:700;font-size:12px;border:0;border-radius:8px;padding:9px 13px;cursor:pointer;background:var(--kraft-edge);color:var(--paper);box-shadow:0 4px 0 #6e4e28}
+  .nav button{font-family:var(--retro);font-weight:400;font-size:9px;border:0;border-radius:8px;padding:10px 13px;cursor:pointer;background:var(--kraft-edge);color:var(--paper);box-shadow:0 4px 0 #6e4e28}
   .nav button:active{transform:translateY(3px);box-shadow:0 1px 0 #6e4e28}
   .nav button.primary{background:var(--red);box-shadow:0 4px 0 var(--red-deep)}
   .nav button:disabled{opacity:.4}
-  .quip{position:fixed;left:50%;top:9%;transform:translateX(-50%);z-index:25;font-family:'Press Start 2P',monospace;font-size:10px;
+  .quip{position:fixed;left:50%;top:9%;transform:translateX(-50%);z-index:25;font-family:var(--retro);font-size:10px;
     color:#fff;background:rgba(138,42,28,.92);padding:8px 12px;border-radius:8px;opacity:0;pointer-events:none;white-space:nowrap}
-  .quip.show{animation:quip 1.5s ease}
+  .quip.show{animation:quip 3s ease}
   @keyframes quip{0%{opacity:0;transform:translateX(-50%) translateY(-6px)}15%,70%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0}}
-  .tap-hint{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);z-index:24;font-family:var(--mono);font-size:12px;
+  .tap-hint{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);z-index:24;font-family:var(--retro);font-size:9px;white-space:nowrap;
     color:#5a3d28;background:rgba(255,250,235,.82);padding:5px 11px;border-radius:13px;animation:bob 1.6s ease-in-out infinite;pointer-events:none}
   @keyframes bob{50%{transform:translateX(-50%) translateY(-5px)}}
 
@@ -240,6 +265,17 @@
   </div>
 </div>
 
+<div class="cd-bar" id="cdBar">
+  <div class="cd-row">
+    <div class="cd-unit"><span class="cd-num" id="cdD">000</span><span class="cd-lbl">DIAS</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cdH">00</span><span class="cd-lbl">HORAS</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cdM">00</span><span class="cd-lbl">MIN</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cdS">00</span><span class="cd-lbl">SEG</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cdMs">000</span><span class="cd-lbl">MS</span></div>
+  </div>
+  <div class="cd-tz" id="cdTz"></div>
+</div>
+
 <div id="stage">
   <div class="scene">
     <div class="env" id="env">
@@ -247,7 +283,7 @@
       <div class="ribbon"></div>
       <div class="flap"></div>
       <div class="pocket"></div>
-      <div class="seal" id="seal"><img src="final/assets/seal.jpg" alt="Selo M&amp;S"></div>
+      <div class="seal" id="seal"><img src="./assets/seal.jpg" alt="Selo M&amp;S"></div>
     </div>
     <div class="carrier" id="carrier"><div class="pcard back"><span>M&amp;S</span></div></div>
     <div class="card" id="card">
@@ -259,7 +295,7 @@
 </div>
 
 <div class="quip" id="quip"></div>
-<div class="tap-hint" id="tapHint" hidden>toca no ecrã para avançar ›</div>
+<div class="tap-hint" id="tapHint" hidden>toca para avançar ›</div>
 
 <div id="hud">
   <div class="pips" id="pips"></div>
@@ -275,7 +311,7 @@
 (function(){
   "use strict";
   var GROUPS = JSON.parse(document.getElementById('guests').textContent);
-  var A='final/assets/';
+  var A='./assets/';
 
   /* floating pieces */
   var bits=["♟","♜","♞","🎲","🃏","🎯","🀄","🁣","♠","♥","♦","♣","🧩","🎴","👑","💍","♚","⏳"];
@@ -292,7 +328,7 @@
       return '<div class="stile">'+(ch===' '?'&nbsp;':ch)+(sc?'<sub>'+sc+'</sub>':'')+'</div>';
     }).join('')+'</div>';
   }
-  function dropTiles(scope){scope.querySelectorAll('.stile').forEach(function(t,i){setTimeout(function(){t.classList.add('drop');},i*70);});}
+  function dropTiles(scope){scope.querySelectorAll('.stile').forEach(function(t,i){setTimeout(function(){t.classList.add('drop');},i*200);});}
   function fitScrabRows(scope){
     scope.querySelectorAll('.scrab-rows').forEach(function(rows){
       var w=rows.clientWidth; if(!w)return;
@@ -326,7 +362,7 @@
     if(!g||g.joker){
       return '<div class="pcard joker"><div class="cnr tl">J<br>O<br>K<br>E<br>R</div><div class="mid">🃏</div><div class="cnr br">J<br>O<br>K<br>E<br>R</div></div>';
     }
-    var c=g.rank+'<br>'+g.suit;
+    var c=g.rank+g.suit;
     return '<div class="pcard '+suitColor(g.suit)+'"><div class="cnr tl">'+c+'</div><div class="mid">'+g.suit+'</div><div class="cnr br">'+c+'</div></div>';
   }
   function cardLabel(g){return (!g||g.joker)?'JOKER':g.rank+g.suit;}
@@ -355,14 +391,15 @@
         '<p><b>Prepara os dados!</b> 🎲</p>';
     }
     var fns=player.names.map(firstName);
+    var plural=fns.length>1;
     var namesHTML='<div class="scrab-rows">'+fns.map(function(n,i){return tilesHTML(i<fns.length-1?n+'&':n);}).join('')+'</div>';
-    return '<h3>Atenção, '+(fns.length>1?'Jogadores':'Jogador')+'</h3>'+
+    return '<h3>Atenção, '+(plural?'Jogadores':'Jogador')+'</h3>'+
       namesHTML+
-      '<p>a tua presença é requisitada no tabuleiro</p>'+
+      '<p>a '+(plural?'vossa':'tua')+' presença é requisitada no tabuleiro</p>'+
       '<h2 style="font-size:clamp(18px,4.8vw,24px)">M&amp;S — O Jogo</h2>'+
       '<p class="mono">EXPANSÃO: ALIANÇA ESTRATÉGICA</p>'+
       '<img class="gico" style="height:58px" src="'+A+'i_ring.png" alt="">'+
-      '<p>A tua carta: <b>'+cardLabel(player)+'</b>'+(player.nocard?' <span class="mono">(JOKER)</span>':'')+'</p>'+
+      '<p>A '+(plural?'vossa':'tua')+' carta: <b>'+cardLabel(player)+'</b>'+(player.nocard?' <span class="mono">(JOKER)</span>':'')+'</p>'+
       '<p><b>Prepara os dados!</b> 🎲</p>';
   }
 
@@ -373,7 +410,7 @@
         return '<img class="photo" src="'+A+'couple.jpg" alt="Miguel &amp; Sofia">'+
           '<h2>Miguel Comba <img class="amp" src="'+A+'amp.jpg" alt="&amp;"> Sofia Moreira</h2>'+
           '<h3>Aliança Estratégica</h3>'+
-          '<div class="big">12 de Junho de 2027</div>'+
+          '<div class="big">6 de Junho de 2027</div>'+
           '<p style="font-style:italic">"Advance to the altar."</p>';
       }},
 
@@ -398,7 +435,7 @@
           row('i_puzzle.png','2 Tabuleiros',
             '<a href="'+MAP_CH+'" target="_blank" rel="noopener">Igreja Matriz de S. João Baptista das Lampas ›</a><br>Av. Central, 2705-737 · São João das Lampas<br>'+
             '<a href="'+MAP_Q+'" target="_blank" rel="noopener">Quinta da Praia ›</a><br>Est. da Aguda, R. do Roligo 52 · 2705-623 Fontanelas')+
-          row('i_domino.png','1 Dia de Jogo','12 de Junho de 2027 · Sábado')+
+          row('i_domino.png','1 Dia de Jogo','6 de Junho de 2027 · Domingo')+
           row('i_pawn.png','1 Combinação Especial','Convidados, Comida, Animação e Diversão')+
           '</div>';
       }},
@@ -451,12 +488,13 @@
       }},
 
     { id:'rsvp', cnr:['+2','🃏'], build:function(){
+        var yesLabel = player && player.names.length>1 ? 'CONTA CONNOSCO' : 'CONTA COMIGO';
         return '<h2>Chegou a vossa vez!</h2>'+
           '<p>Lancem o dado e registem a jogada até <b>12/03/2027</b>.</p>'+
           '<div class="uno"><img src="'+A+'i_unocard.png" alt="+2"></div>'+
           '<p style="font-style:italic">Jogam connosco ou ficam de fora?</p>'+
           '<div class="rsvp">'+
-            '<button type="button" class="yes" data-attend="yes">🎲 VAMOS JOGAR</button>'+
+            '<button type="button" class="yes" data-attend="yes">🎲 '+yesLabel+'</button>'+
             '<button type="button" class="no" data-attend="no">🏳 PASSAMOS A VEZ</button>'+
           '</div>'+
           '<div class="rsvp-status" id="rsvpStatus"></div>'+
@@ -466,7 +504,7 @@
     { id:'end', cnr:['♟','♜'], build:function(){
         return '<div class="finale"><img src="'+A+'rook.png" alt="torre"><img src="'+A+'chip.png" alt="ficha M&amp;S"><img src="'+A+'die.png" alt="dado"></div>'+
           '<h2>Sem ti, o jogo<br>não fica… completo.</h2>'+
-          '<p style="font-style:italic">Miguel <img class="amp" src="'+A+'amp.jpg" alt="&amp;"> Sofia · 12·06·2027</p>'+
+          '<p style="font-style:italic">Miguel <img class="amp" src="'+A+'amp.jpg" alt="&amp;"> Sofia · 6·06·2027</p>'+
           '<div class="badges3" style="margin-top:4px"><img src="'+A+'b_convidados.png" alt=""><img src="'+A+'b_age.png" alt=""><img src="'+A+'b_time.png" alt=""></div>';
       }}
   ];
@@ -477,24 +515,24 @@
   var curtain=document.getElementById('curtain'),env=document.getElementById('env'),
       card=document.getElementById('card'),inner=document.getElementById('cardInner'),
       cnrTL=document.getElementById('cnrTL'),cnrBR=document.getElementById('cnrBR'),
-      carrier=document.getElementById('carrier'),hud=document.getElementById('hud'),
+      carrier=document.getElementById('carrier'),hud=document.getElementById('hud'),cdBar=document.getElementById('cdBar'),
       pipsEl=document.getElementById('pips'),tapHint=document.getElementById('tapHint'),
       quip=document.getElementById('quip'),
       btnNext=document.getElementById('next'),btnPrev=document.getElementById('prev');
-  var idx=-1,busy=false,autoTimer=null,started=false,manual=false,identified=false;
+  var idx=-1,busy=false,started=false,identified=false;
 
-  steps.forEach(function(_,i){var d=document.createElement('i');d.addEventListener('click',function(){manual=true;stopAuto();go(i);});pipsEl.appendChild(d);});
+  steps.forEach(function(_,i){var d=document.createElement('i');d.addEventListener('click',function(){go(i);});pipsEl.appendChild(d);});
   function paintPips(){[].forEach.call(pipsEl.children,function(d,i){d.className=i===idx?'act':'';});}
   function setCnr(a){
-    cnrTL.innerHTML=String(a[0]).replace(/(10|.)([♠♥♦♣])/,'$1<br>$2');
-    cnrBR.innerHTML=String(a[1]).replace(/(10|.)([♠♥♦♣])/,'$1<br>$2');
+    cnrTL.innerHTML=String(a[0]);
+    cnrBR.innerHTML=String(a[1]);
   }
   function showQuip(){ if(idx<=0)return; quip.textContent=QUIPS[(idx-1)%QUIPS.length];
     quip.classList.remove('show');void quip.offsetWidth;quip.classList.add('show'); }
 
   function renderStep(i){
     var s=steps[i];
-    setCnr(player&&i===0?[cardLabel(player),cardLabel(player)]:s.cnr);
+    setCnr(player?[cardLabel(player),cardLabel(player)]:s.cnr);
     inner.innerHTML=s.build();
     dropTiles(inner);
     fitScrabRows(inner);
@@ -508,7 +546,7 @@
   function go(i){
     if(busy||i<0||i>=steps.length||i===idx)return;
     if(i>0 && !identified){ flash(); return; }
-    busy=true;stopAuto();
+    busy=true;
     if(idx>=0){card.classList.add('leaving');card.classList.remove('show');}
     carrier.classList.remove('flash');void carrier.offsetWidth;
     setCarrier(identified?player:undefined);
@@ -519,12 +557,9 @@
       idx=i;renderStep(i);paintPips();
       void card.offsetWidth;card.classList.add('show');
       busy=false;
-      if(i>0 && i<steps.length-1) scheduleAuto();
-    }, idx>=0?170:110);
+    }, idx>=0?960:420);
   }
   function flash(){card.animate([{transform:'translate(-50%,-52%) scale(1)'},{transform:'translate(-50%,-52%) scale(1.02) rotate(-1deg)'},{transform:'translate(-50%,-52%) scale(1)'}],{duration:220});}
-  function scheduleAuto(){stopAuto();if(manual)return;autoTimer=setTimeout(function(){if(idx<steps.length-1)go(idx+1);},7200);}
-  function stopAuto(){if(autoTimer){clearTimeout(autoTimer);autoTimer=null;}}
 
   function wireRsvp(){
     var who = player ? player.names.join(' & ') : '';
@@ -535,8 +570,8 @@
       btn.addEventListener('click',function(){
         var attend=btn.dataset.attend;
         var msg = attend==='yes'
-          ? "Olá Miguel e Sofia! 🎲\n\nJogador(es): "+(who||"(escrever nome)")+"\nCarta: "+(player?cardLabel(player):"-")+"\nConfirmo presença em 12/06/2027: SIM\nNº de acompanhantes: \nRestrições alimentares: \n\nAté ao tabuleiro!"
-          : "Olá Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nInfelizmente não vamos conseguir jogar em 12/06/2027.\nUm abraço!";
+          ? "Olá Miguel e Sofia! 🎲\n\nJogador(es): "+(who||"(escrever nome)")+"\nCarta: "+(player?cardLabel(player):"-")+"\nConfirmo presença em 06/06/2027: SIM\nNº de acompanhantes: \nRestrições alimentares: \n\nAté ao tabuleiro!"
+          : "Olá Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nInfelizmente não vamos conseguir jogar em 06/06/2027.\nUm abraço!";
         status.className='rsvp-status ok';
         status.textContent = attend==='yes' ? '🎲 A abrir o WhatsApp…' : 'A abrir o WhatsApp…';
         window.open('https://wa.me/'+RSVP_WHATSAPP.replace(/[^\d]/g,'')+'?text='+encodeURIComponent(msg), '_blank');
@@ -580,7 +615,7 @@
     setCnr([cardLabel(player),cardLabel(player)]);
     btnNext.disabled=false; tapHint.hidden=false;
     carrier.classList.remove('flash');void carrier.offsetWidth;carrier.classList.add('flash');
-    quip.textContent = player ? ('A tua carta: '+cardLabel(player)) : 'Curinga selvagem!';
+    quip.textContent = player ? ('A '+(player.names.length>1?'vossa':'tua')+' carta: '+cardLabel(player)) : 'Curinga selvagem!';
     quip.classList.remove('show');void quip.offsetWidth;quip.classList.add('show');
   }
 
@@ -589,20 +624,19 @@
     curtain.classList.add('open');
     setTimeout(function(){curtain.classList.add('gone');},1600);
     setTimeout(function(){env.classList.add('opened');},1300);
-    setTimeout(function(){hud.classList.add('on');go(0);btnNext.disabled=true;},2000);
+    setTimeout(function(){hud.classList.add('on');cdBar.classList.add('on');go(0);btnNext.disabled=true;},2000);
   }
   document.getElementById('startBtn').addEventListener('click',begin);
 
-  btnNext.addEventListener('click',function(){manual=true;stopAuto();go(idx+1);});
-  btnPrev.addEventListener('click',function(){manual=true;stopAuto();go(idx-1);});
+  btnNext.addEventListener('click',function(){go(idx+1);});
+  btnPrev.addEventListener('click',function(){go(idx-1);});
   document.getElementById('replay').addEventListener('click',function(){
-    stopAuto();
     curtain.classList.remove('gone','open');curtain.classList.add('closing');
     setTimeout(function(){
       curtain.classList.remove('closing');
-      card.classList.remove('show');idx=-1;started=false;manual=false;identified=false;player=null;
+      card.classList.remove('show');idx=-1;started=false;identified=false;player=null;
       setCarrier(undefined);env.classList.remove('opened');
-      hud.classList.remove('on');tapHint.hidden=true;
+      hud.classList.remove('on');cdBar.classList.remove('on');tapHint.hidden=true;
       begin();
     },1500);
   });
@@ -614,9 +648,31 @@
     if(idx<steps.length-1) go(idx+1);
   });
   document.addEventListener('keydown',function(e){
-    if(e.key==='ArrowRight'){manual=true;stopAuto();go(idx+1);}
-    if(e.key==='ArrowLeft'){manual=true;stopAuto();go(idx-1);}
+    if(e.key==='ArrowRight'){go(idx+1);}
+    if(e.key==='ArrowLeft'){go(idx-1);}
   });
+
+  /* retro countdown to the wedding — 06/06/2027, 10H (Europe/Lisbon, WEST = UTC+1) */
+  var WEDDING_UTC = Date.UTC(2027,5,6,9,0,0,0);
+  var cdTz = 'Europe/Lisbon';
+  try{ cdTz = Intl.DateTimeFormat().resolvedOptions().timeZone || cdTz; }catch(e){}
+  function pad(n,len){ n=String(Math.max(0,Math.floor(n))); while(n.length<len) n='0'+n; return n; }
+  function tickCountdown(){
+    var elD=document.getElementById('cdD'); if(!elD)return;
+    var diff=Math.max(0,WEDDING_UTC-Date.now());
+    var ms=diff%1000; diff=(diff-ms)/1000;
+    var s=diff%60; diff=(diff-s)/60;
+    var m=diff%60; diff=(diff-m)/60;
+    var h=diff%24; diff=(diff-h)/24;
+    elD.textContent=pad(diff,3);
+    document.getElementById('cdH').textContent=pad(h,2);
+    document.getElementById('cdM').textContent=pad(m,2);
+    document.getElementById('cdS').textContent=pad(s,2);
+    document.getElementById('cdMs').textContent=pad(ms,3);
+    var elTz=document.getElementById('cdTz'); if(elTz) elTz.textContent='fuso horário: '+cdTz;
+  }
+  setInterval(tickCountdown,47);
+  tickCountdown();
 })();
 </script>
 </body>
