@@ -1,19 +1,24 @@
 # M&S — O Jogo · Convite de casamento Miguel & Sofia
 
 Convite digital de casamento com tema de jogo de tabuleiro.
-Miguel Comba & Sofia Moreira · 6 de Junho de 2027 · São João das Lampas.
+Miguel Comba & Sofia Moreira · 12 de Junho de 2027 · São João das Lampas.
 
 ## Estrutura
 
 | Caminho        | O que é                                                                 |
 |----------------|------------------------------------------------------------------------|
-| `index.html`   | O convite — página única, autónoma (CSS + JS inline). Não há passo de build nem dependências — abre em qualquer browser, funciona offline. |
-| `assets/`      | Imagens do convite (fundo, selo, ícones extraídos, foto do casal, etc.) |
-| `fonts/`       | `IM Fell English` (self-hosted, `@font-face` no `index.html`)          |
+| `index.html`   | O convite real — página única, autónoma (CSS + JS inline). Não há passo de build nem dependências — abre em qualquer browser, funciona offline. |
+| `fake/index.html` | **Cópia para portefólio** — o mesmo site, com uma lista de convidados inventada (nomes americanos comuns). Ver `CLAUDE.md`. |
+| `assets/`      | Imagens do convite (fundo, selo, ícones extraídos, foto do casal, etc.) — partilhadas pelas duas versões |
+| `fonts/`       | `IM Fell English`, `Press Start 2P`, `Play` (self-hosted, `@font-face`) — partilhadas pelas duas versões |
 | `404.html`     | Página de erro                                                         |
 | `OG_Assets/`   | Material de origem (`.ppsx`, vídeo, JPEGs, `Nomes.xlsx`). **Fora do git** (`.gitignore`) — grande e contém a lista de convidados em bruto. |
 
 Havia três edições (Clássica, Deluxe, Final) durante o desenvolvimento — foram consolidadas numa só (a antiga "Final") para eliminar a duplicação de código entre a raiz e `final/`. O histórico das outras duas fica disponível no git caso valha a pena revisitá-las.
+
+### Site "fake" (portefólio)
+
+`fake/index.html` é uma **cópia real** do `index.html` (não um symlink nem build) — os caminhos relativos para `../assets/`/`../fonts/` apontam para as mesmas pastas partilhadas na raiz. A única diferença intencional é a lista de convidados (`<script id="guests">`), gerada a partir de `scripts/fake_guests.json` em vez do Excel real. **Qualquer alteração ao `index.html` deve ser replicada no `fake/index.html`** — ver `CLAUDE.md` para o processo e para um aviso importante sobre o número de WhatsApp do RSVP ser partilhado entre os dois sites.
 
 ## Lista de convidados
 

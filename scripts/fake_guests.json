@@ -1,0 +1,15 @@
+[
+  {"rank":"K","suit":"♥","joker":false,"nocard":false,"names":["David Smith"],"aliases":[],"q":["david","smith"]},
+  {"rank":"Q","suit":"♠","joker":false,"nocard":false,"names":["Sarah Smith","Christopher Smith"],"aliases":[],"q":["christopher","sarah","smith"]},
+  {"rank":"A","suit":"♠","joker":false,"nocard":false,"names":["Nuno Carter"],"aliases":[],"q":["carter","nuno"]},
+  {"rank":"A","suit":"♣","joker":false,"nocard":false,"names":["Nuno Bennett","Olivia Bennett"],"aliases":[],"q":["bennett","nuno","olivia"]},
+  {"rank":"A","suit":"♦","joker":false,"nocard":false,"names":["Matthew Brown"],"aliases":[],"q":["brown","matthew"]},
+  {"rank":"K","suit":"♦","joker":false,"nocard":false,"names":["Jessica Brown","Daniel Brown"],"aliases":[],"q":["brown","daniel","jessica"]},
+  {"rank":"K","suit":"♠","joker":false,"nocard":false,"names":["Ashley Davis"],"aliases":[],"q":["ashley","davis"]},
+  {"rank":"J","suit":"♥","joker":false,"nocard":false,"names":["William Miller","Amanda Miller","Joshua Miller"],"aliases":[],"q":["amanda","joshua","miller","william"]},
+  {"rank":"J","suit":"♦","joker":false,"nocard":false,"names":["Elizabeth Wilson"],"aliases":[],"q":["elizabeth","wilson"]},
+  {"rank":"J","suit":"♣","joker":false,"nocard":false,"names":["Andrew Moore","Samantha Moore"],"aliases":[],"q":["andrew","moore","samantha"]},
+  {"rank":"J","suit":"♠","joker":false,"nocard":false,"names":["Brian Taylor"],"aliases":[],"q":["brian","taylor"]},
+  {"rank":"Q","suit":"♦","joker":false,"nocard":false,"names":["Nicole Anderson","Kevin Anderson","Rachel Anderson"],"aliases":[],"q":["anderson","kevin","nicole","rachel"]},
+  {"rank":"JOKER","suit":null,"joker":true,"nocard":true,"names":["Justin Thomas"],"aliases":[],"q":["justin","thomas"]}
+]
