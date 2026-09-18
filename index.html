@@ -309,7 +309,7 @@
       <div class="ribbon"></div>
       <div class="flap"></div>
       <div class="pocket"></div>
-      <div class="seal" id="seal"><img src="./assets/seal.jpg" alt="Selo M&amp;S"></div>
+      <div class="seal" id="seal"><img src="./assets/seal.png" alt="Selo M&amp;S"></div>
     </div>
     <div class="carrier" id="carrier"><div class="pcard back"><span>M&amp;S</span></div></div>
     <div class="card" id="card">
@@ -354,7 +354,7 @@
       return '<div class="stile">'+(ch===' '?'&nbsp;':ch)+(sc?'<sub>'+sc+'</sub>':'')+'</div>';
     }).join('')+'</div>';
   }
-  function dropTiles(scope){scope.querySelectorAll('.stile').forEach(function(t,i){setTimeout(function(){t.classList.add('drop');},i*200);});}
+  function dropTiles(scope){scope.querySelectorAll('.stile').forEach(function(t,i){setTimeout(function(){t.classList.add('drop');},1000+i*200);});}
   function fitScrabRows(scope){
     scope.querySelectorAll('.scrab-rows').forEach(function(rows){
       var w=rows.clientWidth; if(!w)return;
