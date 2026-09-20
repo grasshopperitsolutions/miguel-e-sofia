@@ -201,15 +201,15 @@
 
   /* map */
   svg.map,img.map{width:100%;height:auto;border-radius:8px;border:2px solid var(--kraft-edge);background:#e8f1e6;display:block}
-  img.map{max-height:min(30vh,200px);object-fit:contain}
+  img.map{max-height:min(22vh,160px);object-fit:contain}
 
   /* title banner images (replace text titles on some cards) */
   .title-banner{width:min(92%,340px);height:auto;display:block;margin:0 auto}
-  .legend{width:100%;display:flex;flex-direction:column;gap:7px;text-align:left;margin-top:4px}
-  .legend .row{display:flex;gap:9px;align-items:flex-start}
+  .legend{width:100%;display:flex;flex-direction:column;gap:5px;text-align:left;margin-top:4px}
+  .legend .row{display:flex;gap:7px;align-items:flex-start}
   .legend .row:nth-child(even){flex-direction:row-reverse;text-align:right}
-  .legend .row img{width:30px;flex:0 0 30px;object-fit:contain}
-  .legend .row small{font-family:var(--mono);font-size:11px;line-height:1.3}
+  .legend .row img{width:26px;flex:0 0 26px;object-fit:contain}
+  .legend .row small{font-family:var(--mono);font-size:10.5px;line-height:1.25}
   .legend .row small b{color:var(--red-deep)}
 
   /* objetivos / regras with role icons */
@@ -223,9 +223,10 @@
   .uno{width:78px;transform:rotate(-5deg);filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
   .uno img{width:100%;display:block}
 
-  .rsvp{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:6px}
-  .rsvp button{text-decoration:none;font-family:var(--retro);font-weight:400;font-size:9px;line-height:1.5;padding:11px 14px;border-radius:9px;
-    border:0;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.25);transition:transform .1s,opacity .2s}
+  .rsvp{display:flex;gap:10px;justify-content:center;margin-top:6px}
+  .rsvp button{text-decoration:none;font-family:var(--retro);font-weight:400;font-size:9px;line-height:1.5;padding:11px 8px;border-radius:9px;
+    border:0;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.25);transition:transform .1s,opacity .2s;
+    flex:1 1 0;max-width:140px;display:flex;align-items:center;justify-content:center;text-align:center}
   .rsvp button:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
   .rsvp button:disabled{opacity:.55;cursor:default;transform:none;box-shadow:0 4px 0 rgba(0,0,0,.25)}
   .rsvp .yes{background:var(--green);color:#fff}
@@ -402,7 +403,7 @@
   var QUINTA="Quinta da Praia, Estrada da Aguda, Rua do Roligo 52, 2705-623 Fontanelas";
   var MAP_CH="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(CHURCH);
   var MAP_Q ="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(QUINTA);
-  var RSVP_WHATSAPP="+351964412547";
+  var RSVP_WHATSAPP="+351964412547"; /* fallback when a guest has no per-guest contact (e.g. not found in the guest list) */
 
   function greetCard(){
     if(!player && !identified){
@@ -424,7 +425,7 @@
     return '<h3>Atenção, '+(plural?'Jogadores':'Jogador')+'</h3>'+
       namesHTML+
       '<p>a '+(plural?'vossa':'tua')+' presença é requisitada no tabuleiro</p>'+
-      '<img class="title-banner" style="width:min(80%,280px)" src="'+A+'title_strategic_alliance.png" alt="Miguel Comba &amp; Sofia Moreira · Aliança Estratégica">'+
+      '<img class="title-banner" style="width:min(80%,280px)" src="'+A+'title_the_game.png" alt="M&amp;S — O Jogo · Expansão: Aliança Estratégica">'+
       '<img class="gico" style="height:58px" src="'+A+'i_ring.png" alt="">'+
       '<p>A '+(plural?'vossa':'tua')+' carta: <b>'+cardLabel(player)+'</b>'+(player.nocard?' <span class="mono">(JOKER)</span>':'')+'</p>'+
       '<p><b>Prepara os dados!</b> 🎲</p>';
@@ -504,7 +505,7 @@
     { id:'rsvp', cnr:['+2','🃏'], build:function(){
         var yesLabel = player && player.names.length>1 ? 'CONTA CONNOSCO' : 'CONTA COMIGO';
         return '<h2>Chegou a vossa vez!</h2>'+
-          '<p>Lancem o dado e registem a jogada até <b>12/03/2027</b>.</p>'+
+          '<p>Lancem o dado e registem a jogada até<br><b style="font-size:2em">12 de Março de 2027</b></p>'+
           '<p style="font-style:italic">Jogam connosco ou ficam de fora?</p>'+
           '<div class="rsvp">'+
             '<button type="button" class="yes" data-attend="yes">🎲 '+yesLabel+'</button>'+
@@ -526,7 +527,7 @@
     // { id:'end', cnr:['♟','♜'], build:function(){
     //     return '<div class="finale"><img src="'+A+'rook.png" alt="torre"><img src="'+A+'chip.png" alt="ficha M&amp;S"><img src="'+A+'die.png" alt="dado"></div>'+
     //       '<h2>Sem ti, o jogo<br>não fica… completo.</h2>'+
-    //       '<p style="font-style:italic">Miguel <img class="amp" src="'+A+'amp.jpg" alt="&amp;"> Sofia · 12·06·2027</p>'+
+    //       '<p style="font-style:italic">Miguel <img class="amp" src="'+A+'amp.jpg" alt="&amp;"> Sofia · 12 de Junho de 2027</p>'+
     //       '<div class="badges3" style="margin-top:4px"><img src="'+A+'b_convidados.png" alt=""><img src="'+A+'b_age.png" alt=""><img src="'+A+'b_time.png" alt=""></div>';
     //   }}
   ];
@@ -592,11 +593,12 @@
       btn.addEventListener('click',function(){
         var attend=btn.dataset.attend;
         var msg = attend==='yes'
-          ? "Olá Miguel e Sofia! 🎲\n\nJogador(es): "+(who||"(escrever nome)")+"\nCarta: "+(player?cardLabel(player):"-")+"\nConfirmo presença em 12/06/2027: SIM\nNº de acompanhantes extra: \nRestrições alimentares: \n\nAté ao tabuleiro!"
-          : "Olá Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nInfelizmente não vamos conseguir jogar em 12/06/2027.\nUm abraço!";
+          ? "Olá Miguel e Sofia! 🎲\n\nJogador(es): "+(who||"(escrever nome)")+"\nCarta: "+(player?cardLabel(player):"-")+"\nConfirmo presença em 12 de Junho de 2027: SIM\nNº de acompanhantes extra: \nRestrições alimentares: \n\nAté ao tabuleiro!"
+          : "Olá Miguel e Sofia!\n\nJogador(es): "+(who||"(escrever nome)")+"\nInfelizmente não vamos conseguir jogar em 12 de Junho de 2027.\nUm abraço!";
         status.className='rsvp-status ok';
         status.textContent = attend==='yes' ? '🎲 A abrir o WhatsApp…' : 'A abrir o WhatsApp…';
-        window.open('https://wa.me/'+RSVP_WHATSAPP.replace(/[^\d]/g,'')+'?text='+encodeURIComponent(msg), '_blank');
+        var number = (player && player.contact) ? player.contact : RSVP_WHATSAPP;
+        window.open('https://wa.me/'+number.replace(/[^\d]/g,'')+'?text='+encodeURIComponent(msg), '_blank');
       });
     });
   }

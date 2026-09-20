@@ -13,7 +13,8 @@ for i, row in enumerate(ws.iter_rows(values_only=True)):
         continue
     if row[0] is None:
         continue
-    rows.append((str(row[0]), None if row[1] is None else str(row[1])))
+    contact = None if row[2] is None else re.sub(r"\D", "", str(row[2]))
+    rows.append((str(row[0]), None if row[1] is None else str(row[1]), contact))
 
 
 def norm(s):
@@ -78,10 +79,10 @@ def new_group(base, rank, suit):
     return g
 
 
-for raw, code in rows:
+for raw, code, contact in rows:
     disp, alias = clean_display(raw)
     rawn = re.sub(r"\s+", " ", raw.replace("\xa0", " ")).strip()
-    member = {"name": disp, "raw": rawn, "plus": 0}
+    member = {"name": disp, "raw": rawn, "plus": 0, "contact": contact}
     if alias:
         member["alias"] = alias
     rank, suit, plus = parse_card(code)
@@ -137,11 +138,16 @@ for g in groups:
         for t in re.findall(r"[a-z0-9]+", norm(m["name"]) + " " + norm(m["raw"])):
             if len(t) >= 2 and t not in STOP:
                 toks.add(t)
+    contacts = [m["contact"] for m in g["members"] if m.get("contact")]
+    contact = contacts[0] if contacts else None
+    if contact and not contact.startswith("351"):
+        contact = "351" + contact
     out.append({
         "rank": g["rank"], "suit": g["suit"],
         "joker": g["rank"] == "JOKER", "nocard": bool(g.get("nocard")),
         "names": [m["name"] for m in g["members"]],
         "aliases": [m.get("alias") for m in g["members"] if m.get("alias")],
+        "contact": ("+" + contact) if contact else None,
         "q": sorted(toks),
     })
 
