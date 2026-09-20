@@ -33,6 +33,11 @@ anyway — a real duplicate sidesteps that.
    about the fake one). Two of the fake guests are named "Nuno" on purpose,
    to match the placeholder text `O teu nome (ex.: Nuno)` and demonstrate
    the disambiguation flow.
+3. The `<meta property="og:url">` value — root is
+   `https://miguel-e-sofia.site/`, `fake/` is `https://miguel-e-sofia.site/fake/`.
+   `og:image`/`twitter:image` stay identical on both (absolute URL to the
+   shared `assets/couple.jpg` — social crawlers need an absolute URL, and
+   there's only one copy of the image, at the repo root).
 
 **When you change anything else — copy, CSS, JS, timing, new features —
 apply it to both `index.html` and `fake/index.html`.** The fastest safe way:
@@ -48,6 +53,7 @@ html = open('/tmp/fake_new.html', encoding='utf-8').read()
 pattern = re.compile(r'(<script id=\"guests\" type=\"application/json\">)(.*?)(</script>)', re.S)
 html, n = pattern.subn(lambda m: m.group(1) + compact + m.group(3), html)
 assert n == 1
+html = html.replace('https://miguel-e-sofia.site/\"', 'https://miguel-e-sofia.site/fake/\"')
 open('fake/index.html', 'w', encoding='utf-8').write(html)
 "
 ```
@@ -63,15 +69,16 @@ python3 -c "
 a = open('index.html', encoding='utf-8').readlines()
 b = open('fake/index.html', encoding='utf-8').read()
 b = b.replace('../assets/', './assets/').replace(\"'../fonts/\", \"'fonts/\").replace(', ../fonts/', ', fonts/')
+b = b.replace('https://miguel-e-sofia.site/fake/\"', 'https://miguel-e-sofia.site/\"')
 b = b.splitlines(keepends=True)
 diffs = [i for i,(x,y) in enumerate(zip(a,b)) if x!=y]
 print('differing line numbers (0-indexed):', diffs)
 "
 ```
 
-Expect exactly 3 lines back: the two font-path comment lines near the top
-(cosmetic only — `fonts/...` vs `../fonts/...` inside an HTML comment) and
-the `<script id="guests">` line. Anything else means a real edit didn't make
+Expect exactly one line back: the `<script id="guests">` line (the `.replace()`
+calls above already normalize the path-prefix and `og:url` differences before
+comparing). Anything else means a real edit didn't make
 it into `fake/index.html` — go apply it.
 
 ## Known caveat: RSVP shares the real WhatsApp number
