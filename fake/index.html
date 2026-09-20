@@ -408,7 +408,7 @@
     if(!player && !identified){
       return '<h3>Atenção, Jogador</h3>'+
         '<p>a tua presença é requisitada no tabuleiro</p>'+
-        '<img class="title-banner" src="'+A+'title_the_game.png" alt="M&amp;S — O Jogo · Expansão: Aliança Estratégica">'+
+        '<img class="title-banner" src="'+A+'title_strategic_alliance.png" alt="Miguel Comba &amp; Sofia Moreira · Aliança Estratégica">'+
         '<p style="font-style:italic">Quem está no tabuleiro?</p>';
     }
     if(!player){
@@ -424,7 +424,7 @@
     return '<h3>Atenção, '+(plural?'Jogadores':'Jogador')+'</h3>'+
       namesHTML+
       '<p>a '+(plural?'vossa':'tua')+' presença é requisitada no tabuleiro</p>'+
-      '<img class="title-banner" style="width:min(80%,280px)" src="'+A+'title_the_game.png" alt="M&amp;S — O Jogo · Expansão: Aliança Estratégica">'+
+      '<img class="title-banner" style="width:min(80%,280px)" src="'+A+'title_strategic_alliance.png" alt="Miguel Comba &amp; Sofia Moreira · Aliança Estratégica">'+
       '<img class="gico" style="height:58px" src="'+A+'i_ring.png" alt="">'+
       '<p>A '+(plural?'vossa':'tua')+' carta: <b>'+cardLabel(player)+'</b>'+(player.nocard?' <span class="mono">(JOKER)</span>':'')+'</p>'+
       '<p><b>Prepara os dados!</b> 🎲</p>';
@@ -433,19 +433,13 @@
   var steps=[
     { id:'greet', cnr:['♣','♦'], build:greetCard },
 
-    { id:'couple', cnr:['M♥','S♠'], build:function(){
-        return '<img class="photo" src="'+A+'couple.jpg" alt="Miguel &amp; Sofia">'+
-          '<img class="title-banner" src="'+A+'title_strategic_alliance.png" alt="Miguel Comba &amp; Sofia Moreira · Aliança Estratégica">'+
-          '<div class="big">12 de Junho de 2027</div>'+
-          '<p style="font-style:italic">"Advance to the altar."</p>';
-      }},
-
-    { id:'ficha', cnr:['🎲','🃏'], build:function(){
-        return '<img class="chipimg" src="'+A+'chip_gold.png" alt="Ficha M&amp;S">'+
-          '<img class="title-banner" style="margin-top:4px" src="'+A+'title_the_game.png" alt="M&amp;S — O Jogo · Expansão: Aliança Estratégica">'+
-          '<div class="badges3" style="margin-top:10px"><img src="'+A+'b_convidados.png" alt="2 noivos + convidados">'+
-            '<img src="'+A+'b_age.png" alt="0 a 100 anos"><img src="'+A+'b_time.png" alt="12 horas"></div>';
-      }},
+    // hidden — probably will be removed
+    // { id:'couple', cnr:['M♥','S♠'], build:function(){
+    //     return '<img class="photo" src="'+A+'couple.jpg" alt="Miguel &amp; Sofia">'+
+    //       '<img class="title-banner" src="'+A+'title_strategic_alliance.png" alt="Miguel Comba &amp; Sofia Moreira · Aliança Estratégica">'+
+    //       '<div class="big">12 de Junho de 2027</div>'+
+    //       '<p style="font-style:italic">"Advance to the altar."</p>';
+    //   }},
 
     { id:'elem', cnr:['♜','♞'], build:function(){
         function row(icL,t,d,icR){return '<div class="row"><img src="'+A+icL+'" alt=""><div><b>'+t+'</b><small>'+d+'</small></div>'+(icR?'<img src="'+A+icR+'" alt="">':'')+'</div>';}
@@ -511,22 +505,30 @@
         var yesLabel = player && player.names.length>1 ? 'CONTA CONNOSCO' : 'CONTA COMIGO';
         return '<h2>Chegou a vossa vez!</h2>'+
           '<p>Lancem o dado e registem a jogada até <b>12/03/2027</b>.</p>'+
-          '<div class="uno"><img src="'+A+'i_unocard.png" alt="+2"></div>'+
           '<p style="font-style:italic">Jogam connosco ou ficam de fora?</p>'+
           '<div class="rsvp">'+
             '<button type="button" class="yes" data-attend="yes">🎲 '+yesLabel+'</button>'+
             '<button type="button" class="no" data-attend="no">🏳 PASSAMOS A VEZ</button>'+
           '</div>'+
+          '<div class="uno"><img src="'+A+'i_unocard.png" alt="+2"></div>'+
           '<div class="rsvp-status" id="rsvpStatus"></div>'+
           '<p class="mono" style="margin-top:8px">Para jogadores extra, contactar os noivos.</p>';
       }},
 
-    { id:'end', cnr:['♟','♜'], build:function(){
-        return '<div class="finale"><img src="'+A+'rook.png" alt="torre"><img src="'+A+'chip.png" alt="ficha M&amp;S"><img src="'+A+'die.png" alt="dado"></div>'+
-          '<h2>Sem ti, o jogo<br>não fica… completo.</h2>'+
-          '<p style="font-style:italic">Miguel <img class="amp" src="'+A+'amp.jpg" alt="&amp;"> Sofia · 12·06·2027</p>'+
-          '<div class="badges3" style="margin-top:4px"><img src="'+A+'b_convidados.png" alt=""><img src="'+A+'b_age.png" alt=""><img src="'+A+'b_time.png" alt=""></div>';
-      }}
+    { id:'ficha', cnr:['🎲','🃏'], build:function(){
+        return '<img class="chipimg" src="'+A+'chip_gold.png" alt="Ficha M&amp;S">'+
+          '<img class="title-banner" style="margin-top:4px" src="'+A+'title_the_game.png" alt="M&amp;S — O Jogo · Expansão: Aliança Estratégica">'+
+          '<div class="badges3" style="margin-top:10px"><img src="'+A+'b_convidados.png" alt="2 noivos + convidados">'+
+            '<img src="'+A+'b_age.png" alt="0 a 100 anos"><img src="'+A+'b_time.png" alt="12 horas"></div>';
+      }},
+
+    // hidden — probably will be removed
+    // { id:'end', cnr:['♟','♜'], build:function(){
+    //     return '<div class="finale"><img src="'+A+'rook.png" alt="torre"><img src="'+A+'chip.png" alt="ficha M&amp;S"><img src="'+A+'die.png" alt="dado"></div>'+
+    //       '<h2>Sem ti, o jogo<br>não fica… completo.</h2>'+
+    //       '<p style="font-style:italic">Miguel <img class="amp" src="'+A+'amp.jpg" alt="&amp;"> Sofia · 12·06·2027</p>'+
+    //       '<div class="badges3" style="margin-top:4px"><img src="'+A+'b_convidados.png" alt=""><img src="'+A+'b_age.png" alt=""><img src="'+A+'b_time.png" alt=""></div>';
+    //   }}
   ];
 
   var QUIPS=["Yahtzee!","Xeque-mate.","UNO!","É a tua vez.","Player 2 entrou no jogo.","Do not pass GO.","Casa da sorte.","Full house.","Bingo!","Duplo 6.","+4 para ti.","Level up."];
